@@ -30,7 +30,7 @@ export async function Experience() {
         <RevealGroup className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:divide-x sm:divide-line">
           {pillars.map((pillar, i) => (
             <RevealItem key={pillar.title} className="flex flex-col gap-3 sm:px-8 sm:first:pl-0 sm:last:pr-0">
-              <span className="font-display text-2xl text-brass">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-display text-2xl text-brass-ink">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="font-display text-lg text-ink">{pillar.title}</h3>
               <p className="text-sm leading-relaxed text-ink-soft">{pillar.body}</p>
             </RevealItem>
