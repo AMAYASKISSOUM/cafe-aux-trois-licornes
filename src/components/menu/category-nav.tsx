@@ -1,11 +1,15 @@
 import { localized } from "@/lib/i18n-utils";
-import type { MenuCategoryDef } from "@/lib/menu-data";
+
+interface CategoryLike {
+  slug: string;
+  name: { fr: string; en: string };
+}
 
 export function CategoryNav({
   categories,
   locale,
 }: {
-  categories: MenuCategoryDef[];
+  categories: CategoryLike[];
   locale: string;
 }) {
   return (

@@ -23,7 +23,13 @@ when the code merely exists — see the notes under each for what "works" means 
 - [ ] **Reservation system tested against a live database** — the form, validation, and demo-mode fallback are verified working end-to-end in-browser; the actual insert path, capacity enforcement, and email sends have **not** been exercised against a real Postgres instance yet, because Neon isn't provisioned (see below). Code review confidence is high; this is not the same as verified.
 - [x] Admin — Clerk-gated `/admin`, dashboard (today's stats + upcoming), reservations list (filter/search/status actions), hours editor (weekly schedule + special/holiday hours)
 - [ ] **Admin tested against a live login** — cannot be exercised until Clerk is provisioned; the "not configured" fallback state is verified working.
-- [ ] Menu admin (create/edit/delete/reorder items & categories) — **not built**. Menu content today is edited by hand in `src/lib/menu-data.ts` and reseeded. Reasonable next step once the DB is live; deferred in favor of finishing reservations + auth first, per the requested priority order.
+- [x] Menu admin — create/edit/delete categories and items (name/description FR+EN,
+      price, featured, available, display order) at `/admin/menu`. The public `/menu`
+      page and homepage featured-menu section now read from the database when it's
+      configured, falling back to the verified static data otherwise — so a price change
+      in admin shows up on the live site immediately, with no code change or reseed.
+      **Not yet tested against a live database** (same caveat as reservations/admin
+      generally — see below).
 - [ ] Gallery admin (upload/reorder images) — **not built**, same reasoning. Needs Vercel Blob wired up in addition to a DB table (schema for `gallery_images` already exists).
 - [x] Email architecture — Resend + React Email templates (received/confirmed/cancelled), graceful no-op with a log line when `RESEND_API_KEY` is unset. **Not yet sent for real** — needs Resend provisioned.
 
@@ -70,6 +76,7 @@ when the code merely exists — see the notes under each for what "works" means 
   instance rather than being globally shared. Effective under Vercel Fluid Compute (which
   reuses instances), but not a hard guarantee under high concurrent load. Upstash Redis is
   the documented upgrade path in `docs/DEPLOYMENT.md` if this ever matters at this café's scale.
-- **Menu/gallery admin**: not built (see Milestone 2 above) — the owner would currently ask
-  the developer to edit `src/lib/menu-data.ts` for a price change rather than doing it
-  themselves. This is the most significant functionality gap relative to the original brief.
+- **Gallery admin**: not built (see Milestone 2 above) — needs Vercel Blob wired up for
+  uploads in addition to the DB table (schema already exists). The owner would currently
+  ask the developer to add gallery photos rather than doing it themselves. Menu admin
+  *is* built (see above), so this is now the main remaining functionality gap.

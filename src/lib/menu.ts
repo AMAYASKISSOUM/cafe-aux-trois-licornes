@@ -1,23 +1,87 @@
-import { MENU_CATEGORIES, MENU_ITEMS, type MenuCategoryDef, type MenuItemDef } from "@/lib/menu-data";
+import { getDb, isDatabaseConfigured } from "@/db";
+import { menuCategories, menuItems } from "@/db/schema";
+import { MENU_CATEGORIES, MENU_ITEMS } from "@/lib/menu-data";
 
-export interface MenuCategoryWithItems extends MenuCategoryDef {
-  items: MenuItemDef[];
+export interface MenuItemView {
+  id?: string;
+  slug: string;
+  category: string;
+  name: { fr: string; en: string };
+  description?: { fr: string; en: string };
+  price: number;
+  featured?: boolean;
+  available?: boolean;
+  order: number;
 }
 
-/** Data-access seam: swap the body for a Drizzle query once the DB is seeded — callers don't change. */
-export async function getMenu(): Promise<MenuCategoryWithItems[]> {
+export interface MenuCategoryWithItems {
+  id?: string;
+  slug: string;
+  name: { fr: string; en: string };
+  order: number;
+  items: MenuItemView[];
+}
+
+async function getMenuFromDb(): Promise<MenuCategoryWithItems[] | null> {
+  if (!isDatabaseConfigured()) return null;
+  try {
+    const db = getDb();
+    const categories = await db.select().from(menuCategories).orderBy(menuCategories.displayOrder);
+    if (categories.length === 0) return null;
+    const items = await db.select().from(menuItems).orderBy(menuItems.displayOrder);
+
+    return categories.map((cat) => ({
+      id: cat.id,
+      slug: cat.slug,
+      name: { fr: cat.nameFr, en: cat.nameEn },
+      order: cat.displayOrder,
+      items: items
+        .filter((item) => item.categoryId === cat.id && item.isAvailable)
+        .map((item) => ({
+          id: item.id,
+          slug: item.slug,
+          category: cat.slug,
+          name: { fr: item.nameFr, en: item.nameEn },
+          description:
+            item.descriptionFr || item.descriptionEn
+              ? { fr: item.descriptionFr ?? "", en: item.descriptionEn ?? "" }
+              : undefined,
+          price: item.priceCents / 100,
+          featured: item.isFeatured,
+          available: item.isAvailable,
+          order: item.displayOrder,
+        })),
+    }));
+  } catch (err) {
+    console.error("getMenuFromDb: query failed, falling back to static data", err);
+    return null;
+  }
+}
+
+function getMenuFromStatic(): MenuCategoryWithItems[] {
   return MENU_CATEGORIES.slice()
     .sort((a, b) => a.order - b.order)
     .map((category) => ({
-      ...category,
-      items: MENU_ITEMS.filter((item) => item.category === category.slug).sort(
-        (a, b) => a.order - b.order
-      ),
+      slug: category.slug,
+      name: category.name,
+      order: category.order,
+      items: MENU_ITEMS.filter((item) => item.category === category.slug)
+        .sort((a, b) => a.order - b.order)
+        .map((item) => ({ ...item, available: true })),
     }));
 }
 
-export async function getFeaturedMenuItems(limit = 6): Promise<MenuItemDef[]> {
-  return MENU_ITEMS.filter((item) => item.featured).slice(0, limit);
+/** DB-backed once seeded, with an always-available static fallback — never throws. */
+export async function getMenu(): Promise<MenuCategoryWithItems[]> {
+  return (await getMenuFromDb()) ?? getMenuFromStatic();
+}
+
+export async function getFeaturedMenuItems(limit = 6): Promise<MenuItemView[]> {
+  const menu = await getMenu();
+  return menu
+    .flatMap((category) => category.items)
+    .filter((item) => item.featured)
+    .slice(0, limit);
 }
 
 export function normalizeSearch(value: string): string {

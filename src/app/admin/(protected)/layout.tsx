@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
-import { CalendarClock, Clock, LayoutDashboard } from "lucide-react";
+import { CalendarClock, Clock, LayoutDashboard, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
 import { requireAdmin, isClerkConfigured } from "@/lib/admin-auth";
 
@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 const NAV = [
   { href: "/admin", label: "Tableau de bord", icon: LayoutDashboard },
   { href: "/admin/reservations", label: "Réservations", icon: CalendarClock },
+  { href: "/admin/menu", label: "Menu", icon: UtensilsCrossed },
   { href: "/admin/horaires", label: "Horaires", icon: Clock },
 ];
 
