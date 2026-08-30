@@ -267,5 +267,17 @@
     "errorDemoHeading": "Online reservations coming soon",
     "errorDemoBody": "This site is currently a demonstration: online reservations aren't active yet. To book right now, call us at {phone}.",
     "callUs": "Call the café"
+  },
+  "notFoundPage": {
+    "eyebrow": "404 error",
+    "heading": "This page wandered off",
+    "body": "The page you're looking for doesn't exist or has moved. Try the links below, or head back home.",
+    "metaTitle": "Page not found"
+  },
+  "errorPage": {
+    "eyebrow": "Error",
+    "heading": "Something went wrong",
+    "body": "An unexpected error occurred. You can try again, or call us directly if it keeps happening.",
+    "retry": "Try again"
   }
 }

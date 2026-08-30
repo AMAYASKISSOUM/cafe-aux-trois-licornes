@@ -266,5 +266,17 @@
     "errorDemoHeading": "Réservations en ligne bientôt disponibles",
     "errorDemoBody": "Ce site est actuellement une démonstration : les réservations en ligne ne sont pas encore activées. Pour réserver dès maintenant, appelez-nous au {phone}.",
     "callUs": "Appeler le café"
+  },
+  "notFoundPage": {
+    "eyebrow": "Erreur 404",
+    "heading": "Cette page s'est égarée",
+    "body": "La page que vous cherchez n'existe pas ou a été déplacée. Essayez le menu ci-dessous, ou retournez à l'accueil.",
+    "metaTitle": "Page introuvable"
+  },
+  "errorPage": {
+    "eyebrow": "Erreur",
+    "heading": "Quelque chose s'est mal passé",
+    "body": "Une erreur inattendue est survenue. Vous pouvez réessayer, ou nous appeler directement si le problème persiste.",
+    "retry": "Réessayer"
   }
 }
