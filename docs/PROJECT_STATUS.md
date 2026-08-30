@@ -124,3 +124,13 @@ when the code merely exists — see the notes under each for what "works" means 
   badge on the sign-in page and a related console warning. Fine for showing this as a
   demo; promote to Production in the Clerk dashboard (one click) before relying on it for
   the real business, since Development instances have tighter usage limits.
+- **A plain `curl /admin` shows 404, not a redirect — this is expected, not a bug.**
+  Development-instance Clerk apps need a one-time "handshake" redirect through
+  `*.clerk.accounts.dev` to establish a dev-browser identity before they can redirect to
+  sign-in; Clerk's server logic only offers that handshake to requests that look like a
+  real browser navigation (a generic curl request doesn't qualify and gets a bare 404
+  instead). Confirmed with a browser-like User-Agent + Accept header: curl then correctly
+  gets a `307` to the handshake URL, same as what a real browser does invisibly. A real
+  browser hitting `/admin` unauthenticated has always correctly landed on the branded
+  sign-in page in every check performed. This quirk goes away once Clerk is promoted to
+  a Production instance with a real domain (no handshake needed then).
