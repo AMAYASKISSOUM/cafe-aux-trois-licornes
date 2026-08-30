@@ -7,7 +7,6 @@ import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { BUSINESS } from "@/lib/business";
 import { getOpenStatus, formatHour } from "@/lib/hours";
 import { cn } from "@/lib/cn";
-import { Reveal } from "@/components/ui/reveal";
 
 export async function Hero() {
   const [t, tCommon, locale] = await Promise.all([
@@ -31,22 +30,22 @@ export async function Hero() {
         }}
       />
       <Container className="relative z-10 flex flex-col gap-8 pb-16 pt-40 sm:pb-20">
-        <Reveal className="flex max-w-2xl flex-col gap-5">
+        <div className="flex max-w-2xl flex-col gap-5">
           <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-brass-soft">
             {t("eyebrow")}
           </span>
           <h1 className="font-display text-display-xl text-espresso-ink">{t("headline")}</h1>
           <p className="max-w-lg text-lg leading-relaxed text-espresso-ink-soft">{t("subtext")}</p>
-        </Reveal>
+        </div>
 
-        <Reveal delay={0.15} className="flex flex-wrap items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <Link href="/reservation" className={buttonVariants({})}>
             {tCommon("reserveTable")}
           </Link>
           <Link href="/menu" className={buttonVariants({ variant: "on-dark" })}>
             {tCommon("viewMenu")}
           </Link>
-        </Reveal>
+        </div>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-espresso-ink-soft">
           <a
