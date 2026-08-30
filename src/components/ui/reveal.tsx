@@ -1,11 +1,28 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { motion, type Variants } from "motion/react";
 
 const variants: Variants = {
   hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 };
+
+const noopSubscribe = () => () => {};
+
+/**
+ * Content renders fully visible on the server and on first paint — the hidden/reveal
+ * state only switches on after hydration. Framer/motion bakes `initial` inline via SSR,
+ * so without this, content below the fold would be invisible until JS hydrates (or
+ * forever, if JS fails to load). See the LCP incident on the hero for why this matters.
+ */
+function useRevealReady() {
+  return useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false
+  );
+}
 
 export function Reveal({
   children,
@@ -16,11 +33,12 @@ export function Reveal({
   className?: string;
   delay?: number;
 }) {
+  const ready = useRevealReady();
   return (
     <motion.div
       className={className}
-      initial="hidden"
-      whileInView="show"
+      initial={ready ? "hidden" : false}
+      whileInView={ready ? "show" : undefined}
       viewport={{ once: true, margin: "-80px" }}
       variants={variants}
       transition={{ delay }}
@@ -44,12 +62,13 @@ export function RevealGroup({
   className?: string;
   style?: React.CSSProperties;
 }) {
+  const ready = useRevealReady();
   return (
     <motion.div
       className={className}
       style={style}
-      initial="hidden"
-      whileInView="show"
+      initial={ready ? "hidden" : false}
+      whileInView={ready ? "show" : undefined}
       viewport={{ once: true, margin: "-80px" }}
       variants={staggerContainer}
     >

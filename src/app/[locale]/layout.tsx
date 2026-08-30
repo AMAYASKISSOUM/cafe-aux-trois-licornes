@@ -15,7 +15,6 @@ import "../globals.css";
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
-  style: ["normal", "italic"],
   display: "swap",
 });
 
