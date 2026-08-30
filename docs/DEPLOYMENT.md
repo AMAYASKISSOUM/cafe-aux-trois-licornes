@@ -187,11 +187,19 @@ credential is an environment variable.
 
 ## Deployment log
 
-**2026-08-30** — First production deploy.
+**2026-08-30** — First production deploy, then six follow-up fixes from auditing the
+live site (Lighthouse + manual testing), each redeployed and reverified.
 - URL: **https://cafe-aux-trois-licornes.vercel.app**
-- Commit: `a8baf1e`
+- Latest commit: `f7c4c50`
 - Status: READY. All routes verified 200 (public pages, both locales, `/reservation`,
-  `/admin`, `sitemap.xml`, `robots.txt`). Zero console errors on the live site.
+  `/admin`, `sitemap.xml`, `robots.txt`, `/icon`); a genuinely unmatched URL correctly
+  returns HTTP 404 with branded content. Zero console errors on the live site.
+- Fixes made post-first-deploy: WCAG contrast on two text tokens, the `/icon` route
+  404ing (proxy matcher gap), an expensive SVG-filter background under CPU throttling, a
+  motion-hidden hero LCP element (the serious one — see `docs/QUALITY_AUDIT.md`), and a
+  proper branded 404/error/loading state that didn't exist in the first deploy. Final
+  measured scores: 100/100/100 (Accessibility/Best Practices/SEO) on every page and
+  device tested; Performance 92 desktop / 64-75 mobile depending on page.
 - Database/auth/email are not provisioned yet (pending the marketplace terms acceptance
   above), so the site is running in its graceful-fallback state: static menu/hours data,
   reservation form shows the "demo mode" message on submit, `/admin` shows "not

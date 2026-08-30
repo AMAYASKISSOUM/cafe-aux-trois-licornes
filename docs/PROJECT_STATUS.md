@@ -34,6 +34,11 @@ when the code merely exists — see the notes under each for what "works" means 
 - [ ] Strict Content-Security-Policy — intentionally not added yet; see Known Issues.
 - [x] Tests — 32 Vitest tests (availability engine, menu data logic, reservation schema validation)
 - [x] Lint / typecheck / production build — all clean as of this writing
+- [x] Error states — custom branded 404 (`app/global-not-found.tsx`, Next 16's
+      experimental `globalNotFound` — verified in production: real HTTP 404 status, not
+      just matching content), a route-level error boundary with retry, and a
+      dependency-free root fallback for the rare case the layout itself throws. Never
+      shows a raw stack trace to the user.
 - [x] Lighthouse scores — **measured against the live production deployment**: Accessibility, Best Practices, and SEO are **100/100/100 on every page tested, mobile and desktop**. Performance: 92 desktop / 64 mobile on the homepage, 74-75 mobile on lighter pages. Five real bugs found and fixed via this process (including a serious one — motion was hiding the hero text from first paint). Full detail and honest remaining gaps in `docs/QUALITY_AUDIT.md`.
 - [x] Deployment — **live at https://cafe-aux-trois-licornes.vercel.app** (production, verified 200 on every route). See `docs/DEPLOYMENT.md`.
 
