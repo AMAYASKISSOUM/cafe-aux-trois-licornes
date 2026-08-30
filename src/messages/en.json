@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "defaultTitle": "Café Aux Trois Licornes — A Café Built for Play in Gatineau",
+    "template": "%s — Café Aux Trois Licornes",
+    "description": "Café Aux Trois Licornes: carefully made espresso, home-style cooking and board games in a warm vintage room at 335 Boul. Saint-Joseph, Gatineau."
+  },
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "about": "About",
+    "gallery": "Gallery",
+    "reviews": "Reviews",
+    "contact": "Contact",
+    "reserve": "Reserve",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLanguage": "Passer au français"
+  },
+  "footer": {
+    "tagline": "Neighbourhood café in Gatineau.",
+    "navTitle": "Navigation",
+    "infoTitle": "Information",
+    "hoursTitle": "Hours",
+    "followTitle": "Follow along",
+    "privacy": "Privacy",
+    "rights": "All rights reserved.",
+    "directions": "Directions",
+    "call": "Call",
+    "email": "Email"
+  },
+  "common": {
+    "openNow": "Open now",
+    "closedNow": "Closed",
+    "closesAt": "Closes at {time}",
+    "opensAt": "Opens at {time}",
+    "opensTomorrow": "Opens tomorrow at {time}",
+    "viewMenu": "View menu",
+    "reserveTable": "Reserve a table",
+    "learnMore": "Learn more",
+    "seeAll": "See all",
+    "seeFullMenu": "See full menu",
+    "loading": "Loading…",
+    "skipToContent": "Skip to main content",
+    "getDirections": "Get directions",
+    "backHome": "Back to home"
+  },
+  "days": {
+    "0": "Sunday",
+    "1": "Monday",
+    "2": "Tuesday",
+    "3": "Wednesday",
+    "4": "Thursday",
+    "5": "Friday",
+    "6": "Saturday"
+  },
+  "daysShort": {
+    "0": "Sun",
+    "1": "Mon",
+    "2": "Tue",
+    "3": "Wed",
+    "4": "Thu",
+    "5": "Fri",
+    "6": "Sat"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "A café built for play · Gatineau",
+      "headline": "A café with a taste for play.",
+      "subtext": "Carefully made espresso, home-style cooking and board games, in a room furnished piece by piece with vintage finds, in the heart of Gatineau.",
+      "imageLabel": "Photo coming soon — café room"
+    },
+    "intro": {
+      "eyebrow": "Open since June 2025",
+      "heading": "Born from a family story",
+      "body": "Café Aux Trois Licornes takes its name from the founder's three children — the idea behind it is simple: a place to slow down. Carefully made espresso, home-style dishes and board games share the room with furniture gathered piece by piece from vintage finds, chosen rather than mass-ordered.",
+      "imageLabel": "Photo coming soon — the founder or team"
+    },
+    "featuredMenu": {
+      "eyebrow": "On the menu",
+      "heading": "A few favourites",
+      "body": "A selection of some of our most-loved dishes and drinks — the full menu is waiting for you in café.",
+      "imageLabel": "Photo coming soon"
+    },
+    "experience": {
+      "eyebrow": "The experience",
+      "heading": "More than a café",
+      "imageLabel": "Photo coming soon — room atmosphere",
+      "pillars": [
+        {
+          "title": "A room worth exploring",
+          "body": "A piano, a small toy train and an art wall coming to life on the 2nd floor — furnished with vintage finds, mismatched on purpose."
+        },
+        {
+          "title": "Board games, on the house",
+          "body": "Reservable game tables, for a 30-minute break or a full afternoon, with family or friends."
+        },
+        {
+          "title": "A place for everyone",
+          "body": "A welcoming space for the LGBTQ+ community, just as comfortable for working, studying, or simply staying a while."
+        }
+      ]
+    },
+    "galleryPreview": {
+      "eyebrow": "A glimpse",
+      "heading": "A look inside"
+    },
+    "reviews": {
+      "eyebrow": "Google reviews",
+      "heading": "In their words",
+      "ratingSuffix": "on Google",
+      "reviewsSuffix": "reviews",
+      "viewOnGoogle": "See all reviews on Google"
+    },
+    "reservationCta": {
+      "eyebrow": "Tables & games",
+      "heading": "Reserve your table",
+      "body": "For a quiet breakfast, a work session, or a game table — reserve online in a couple of minutes."
+    },
+    "location": {
+      "eyebrow": "Find us",
+      "heading": "335 Boul. Saint-Joseph",
+      "body": "In the heart of Gatineau, steps from Galeries de Hull. Free parking on-site and on the street.",
+      "mapTitle": "Map — Café Aux Trois Licornes"
+    }
+  },
+  "menuPage": {
+    "eyebrow": "Our menu",
+    "heading": "The menu",
+    "intro": "Carefully made espresso, home-style dishes and sweets — made in-house, to stay or to go.",
+    "searchLabel": "Search the menu",
+    "searchPlaceholder": "Search a dish, a drink…",
+    "popular": "Popular",
+    "noResults": "No results for \"{query}\". Try another term.",
+    "resultsCount": "{count, plural, =0 {No results} =1 {1 result} other {# results}}",
+    "priceNote": "Prices subject to change. Let us know about any allergy or dietary restriction.",
+    "metaTitle": "Menu",
+    "metaDescription": "The full menu at Café Aux Trois Licornes in Gatineau: coffee, sandwiches, pastries and homemade desserts, with prices."
+  },
+  "aboutPage": {
+    "eyebrow": "About",
+    "heading": "Our story",
+    "intro": "A café built like a living room, born from a family story and a simple wish: to slow down.",
+    "metaTitle": "About",
+    "metaDescription": "The story of Café Aux Trois Licornes in Gatineau: a family adventure, a room furnished piece by piece with vintage finds, and a welcoming community.",
+    "storyHeading": "Three children, one café",
+    "storyBody1": "Opened in June 2025 by Matthieu Maurice, Café Aux Trois Licornes takes its name from his three children — a poetic way of dedicating his very first permanent location to them. Every piece of furniture, every object was chosen with care: nothing bought in bulk, everything sourced second-hand, mismatched, alive.",
+    "storyBody2": "The room keeps evolving: a piano, a small toy train that delights kids and adults alike, and an art wall taking shape on the 2nd floor, one piece at a time.",
+    "storyImageLabel": "Photo coming soon — reading corner or vintage detail",
+    "founderLabel": "Founder",
+    "founderName": "Matthieu Maurice",
+    "founderBody": "Matthieu still greets regulars in person today, from working the counter to helping carry a stroller up the stairs.",
+    "founderImageLabel": "Photo coming soon — the founder",
+    "valuesHeading": "What drives us",
+    "values": [
+      {
+        "title": "A different pace",
+        "body": "No rush here. Whether for a quick coffee or an afternoon of games, time stretches out."
+      },
+      {
+        "title": "Made in-house",
+        "body": "Sandwiches, dishes and desserts made on-site, with carefully chosen ingredients."
+      },
+      {
+        "title": "A place for everyone",
+        "body": "A warm community, open to all, and recognized as a safe space for the LGBTQ+ community."
+      }
+    ]
+  },
+  "galleryPage": {
+    "eyebrow": "Gallery",
+    "heading": "A look inside",
+    "intro": "Vintage finds, corners built for play, and good things to eat — a room that keeps evolving, one piece at a time.",
+    "metaTitle": "Gallery",
+    "metaDescription": "A photo look inside Café Aux Trois Licornes in Gatineau: vintage decor, the piano corner, game tables and homemade creations.",
+    "sr": "Gallery photo"
+  },
+  "reviewsPage": {
+    "eyebrow": "Google reviews",
+    "heading": "In their words",
+    "intro": "Genuine reviews left by our customers on Google — reproduced here with attribution.",
+    "metaTitle": "Reviews",
+    "metaDescription": "Read Café Aux Trois Licornes' Google reviews: 4.6 out of 5 for the coffee, the vintage atmosphere, and the welcome.",
+    "ratingSuffix": "on Google",
+    "reviewsSuffix": "reviews",
+    "viewOnGoogle": "See all reviews on Google"
+  },
+  "contactPage": {
+    "eyebrow": "Contact",
+    "heading": "Get in touch",
+    "intro": "A question, or a group reservation? Here's how to reach us.",
+    "metaTitle": "Contact",
+    "metaDescription": "Address, phone, email, hours and directions to visit Café Aux Trois Licornes at 335 Boul. Saint-Joseph, Gatineau.",
+    "addressLabel": "Address",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "hoursLabel": "Hours",
+    "parkingLabel": "Parking",
+    "parkingBody": "Free parking on-site and on the street.",
+    "mapTitle": "Map — Café Aux Trois Licornes"
+  },
+  "privacyPage": {
+    "eyebrow": "Privacy",
+    "heading": "Privacy Policy",
+    "intro": "This page explains what personal information we collect through this site, why, and how it is protected.",
+    "metaTitle": "Privacy Policy",
+    "metaDescription": "Café Aux Trois Licornes privacy policy: information collected when booking a reservation, retention, and customer rights.",
+    "updated": "Last updated: August 30, 2026",
+    "sections": [
+      {
+        "heading": "Information we collect",
+        "body": "When you make an online reservation, we collect your name, email, phone number, party size, requested date and time, and any optional notes you add. No financial information is ever requested on this site."
+      },
+      {
+        "heading": "How we use it",
+        "body": "This information is used solely to manage your reservation: confirmation, reminders, changes or cancellation. We never use it for marketing purposes and never sell it."
+      },
+      {
+        "heading": "Retention and hosting",
+        "body": "Reservations are stored in a secure database hosted by our technology providers (Vercel and Neon), for as long as needed to manage the service and meet our accounting obligations, then deleted or anonymized."
+      },
+      {
+        "heading": "Sharing with third parties",
+        "body": "Your information is only shared with the service providers strictly necessary to operate the site (hosting, database, transactional email delivery). None of these providers may use it for their own purposes."
+      },
+      {
+        "heading": "Cookies",
+        "body": "This site uses only essential technical cookies (for example, to remember your language preference). No third-party advertising or tracking cookies are used at this time."
+      },
+      {
+        "heading": "Your rights",
+        "body": "Under Quebec's Act respecting the protection of personal information in the private sector, you may request access to, correction of, or deletion of your information by writing to info@troislicornes.com."
+      }
+    ],
+    "disclaimer": "This page is provided for informational purposes and does not constitute legal advice."
+  },
+  "reservationPage": {
+    "eyebrow": "Reservation",
+    "heading": "Reserve a table",
+    "intro": "For a quiet breakfast, a work session, or a game table. Quick reply by email.",
+    "metaTitle": "Reservation",
+    "metaDescription": "Reserve a table at Café Aux Trois Licornes in Gatineau, online in a couple of minutes.",
+    "whenHeading": "When",
+    "detailsHeading": "Your details",
+    "dateLabel": "Date",
+    "partySizeLabel": "Party size",
+    "timeLabel": "Time",
+    "timeLoading": "Checking availability…",
+    "noSlots": "No availability for this date. Try another date or party size.",
+    "selectDatePrompt": "Pick a date to see available times.",
+    "fullNameLabel": "Full name",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "notesLabel": "Notes (optional)",
+    "notesPlaceholder": "Allergies, special occasion, game table…",
+    "consentLabel": "I agree that my information will be used to process this reservation, per the privacy policy.",
+    "privacyLink": "privacy policy",
+    "submitLabel": "Confirm request",
+    "submittingLabel": "Sending…",
+    "successHeading": "Request sent!",
+    "successBody": "Thank you {name}! We've received your request for {count, plural, =1 {1 guest} other {# guests}} on {date} at {time}. A confirmation email is on its way to {email}.",
+    "newRequest": "Make another request",
+    "errorValidation": "Please fix the highlighted fields.",
+    "errorRateLimited": "Too many attempts. Please try again in a few minutes or call us directly.",
+    "errorUnavailable": "That date is no longer available. Please choose another date.",
+    "errorFull": "That time slot just filled up. Please choose another time.",
+    "errorServer": "Something went wrong. Please try again or call us directly.",
+    "errorDemoHeading": "Online reservations coming soon",
+    "errorDemoBody": "This site is currently a demonstration: online reservations aren't active yet. To book right now, call us at {phone}.",
+    "callUs": "Call the café"
+  }
+}

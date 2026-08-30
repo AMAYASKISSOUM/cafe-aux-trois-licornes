@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------- */
+/* Design tokens — Café Aux Trois Licornes                                */
+/* Vintage Gatineau café x contemporary editorial. Warm, ink-on-parchment,*/
+/* one dark espresso surface for contrast bands. No purple, no neon,      */
+/* no glassmorphism.                                                      */
+/* ---------------------------------------------------------------------- */
+@theme {
+  /* Color: ink & neutrals */
+  --color-ink: #241a14;
+  --color-ink-soft: #55453a;
+  --color-ink-faint: #8a7a6c;
+
+  /* Color: warm surfaces */
+  --color-parchment: #f6f0e4;
+  --color-parchment-deep: #ece0c8;
+  --color-paper: #fffefa;
+
+  /* Color: dark surface (footer, hero overlay, contrast bands) */
+  --color-espresso: #1c140f;
+  --color-espresso-deep: #140e0a;
+  --color-espresso-ink: #efe6d4;
+  --color-espresso-ink-soft: #c9b9a3;
+
+  /* Color: accents */
+  --color-brass: #b4823c;
+  --color-brass-soft: #d1ab6f;
+  --color-brass-ink: #7a5424;
+  --color-rust: #a23e28;
+  --color-rust-dark: #82301e;
+  --color-forest: #3a4a3c;
+
+  /* Color: hairlines */
+  --color-line: #241a141f;
+  --color-line-strong: #241a143d;
+  --color-line-on-dark: #efe6d426;
+
+  /* State colors */
+  --color-success: #3a4a3c;
+  --color-error: #9b2c1f;
+  --color-open: #8fb08a;
+
+  /* Typography */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display-xl: clamp(2.75rem, 1.9rem + 3.8vw, 5.75rem);
+  --text-display-xl--line-height: 1.02;
+  --text-display-xl--letter-spacing: -0.01em;
+
+  --text-display-lg: clamp(2.25rem, 1.7rem + 2.4vw, 3.875rem);
+  --text-display-lg--line-height: 1.05;
+  --text-display-lg--letter-spacing: -0.01em;
+
+  --text-display-md: clamp(1.75rem, 1.45rem + 1.3vw, 2.5rem);
+  --text-display-md--line-height: 1.12;
+
+  --text-display-sm: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+  --text-display-sm--line-height: 1.2;
+
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.14em;
+
+  /* Radius: rectangular language, small radii only */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  /* Shadow: one soft elevation, used sparingly */
+  --shadow-soft: 0 12px 40px -12px rgb(36 26 20 / 0.22);
+  --shadow-lift: 0 4px 16px -6px rgb(36 26 20 / 0.18);
+
+  /* Motion */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 400ms;
+  --duration-slow: 700ms;
+
+  --container-page: 1360px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Base                                                                    */
+/* ---------------------------------------------------------------------- */
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-parchment);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-rust);
+    color: var(--color-parchment);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-rust);
+    outline-offset: 3px;
+    border-radius: var(--radius-xs);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

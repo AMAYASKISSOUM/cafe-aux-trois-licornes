@@ -1,0 +1,270 @@
+{
+  "meta": {
+    "defaultTitle": "Café Aux Trois Licornes — Café espace ludique à Gatineau",
+    "template": "%s — Café Aux Trois Licornes",
+    "description": "Café Aux Trois Licornes : espresso soigné, cuisine maison et jeux de société dans un décor vintage chaleureux, au 335 boul. Saint-Joseph à Gatineau."
+  },
+  "nav": {
+    "home": "Accueil",
+    "menu": "Menu",
+    "about": "À propos",
+    "gallery": "Galerie",
+    "reviews": "Avis",
+    "contact": "Contact",
+    "reserve": "Réserver",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "switchLanguage": "Switch to English"
+  },
+  "footer": {
+    "tagline": "Café de quartier à Gatineau.",
+    "navTitle": "Navigation",
+    "infoTitle": "Informations",
+    "hoursTitle": "Horaire",
+    "followTitle": "Suivez-nous",
+    "privacy": "Confidentialité",
+    "rights": "Tous droits réservés.",
+    "directions": "Itinéraire",
+    "call": "Appeler",
+    "email": "Écrire"
+  },
+  "common": {
+    "openNow": "Ouvert en ce moment",
+    "closedNow": "Fermé",
+    "closesAt": "Ferme à {time}",
+    "opensAt": "Ouvre à {time}",
+    "opensTomorrow": "Ouvre demain à {time}",
+    "viewMenu": "Voir le menu",
+    "reserveTable": "Réserver une table",
+    "learnMore": "En savoir plus",
+    "seeAll": "Tout voir",
+    "seeFullMenu": "Voir le menu complet",
+    "loading": "Chargement…",
+    "skipToContent": "Aller au contenu principal",
+    "getDirections": "Itinéraire",
+    "backHome": "Retour à l'accueil"
+  },
+  "days": {
+    "0": "Dimanche",
+    "1": "Lundi",
+    "2": "Mardi",
+    "3": "Mercredi",
+    "4": "Jeudi",
+    "5": "Vendredi",
+    "6": "Samedi"
+  },
+  "daysShort": {
+    "0": "Dim",
+    "1": "Lun",
+    "2": "Mar",
+    "3": "Mer",
+    "4": "Jeu",
+    "5": "Ven",
+    "6": "Sam"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Café espace ludique · Gatineau",
+      "headline": "Un café qui a le goût du jeu.",
+      "subtext": "Espresso soigné, cuisine maison et jeux de société, dans un décor vintage chiné avec soin, au cœur de Gatineau.",
+      "imageLabel": "Photo à venir — salle du café"
+    },
+    "intro": {
+      "eyebrow": "Depuis juin 2025",
+      "heading": "Né d'une histoire de famille",
+      "body": "Café Aux Trois Licornes tient son nom des trois enfants du fondateur — une idée simple : créer un lieu où l'on prend le temps. Espresso soigné, plats maison et jeux de société se côtoient dans une salle meublée pièce par pièce de trouvailles vintage, dénichées avec soin plutôt qu'achetées en série.",
+      "imageLabel": "Photo à venir — le fondateur ou l'équipe"
+    },
+    "featuredMenu": {
+      "eyebrow": "À la carte",
+      "heading": "Quelques favoris",
+      "body": "Une sélection de plats et boissons parmi les plus appréciés — la carte complète vous attend sur place.",
+      "imageLabel": "Photo à venir"
+    },
+    "experience": {
+      "eyebrow": "L'expérience",
+      "heading": "Plus qu'un café",
+      "imageLabel": "Photo à venir — ambiance de la salle",
+      "pillars": [
+        {
+          "title": "Un décor à explorer",
+          "body": "Piano, petit train miniature et un mur d'art qui prend vie au 2e étage — meublé de chineries vintage, dépareillées avec goût."
+        },
+        {
+          "title": "Jeux de société à volonté",
+          "body": "Des tables de jeu à réserver, pour une pause de 30 minutes ou une après-midi complète, en famille ou entre amis."
+        },
+        {
+          "title": "Un espace pour tous",
+          "body": "Un lieu accueillant pour la communauté LGBTQ+, aussi à l'aise pour travailler, étudier ou simplement s'attarder."
+        }
+      ]
+    },
+    "galleryPreview": {
+      "eyebrow": "Coup d'œil",
+      "heading": "Un aperçu des lieux"
+    },
+    "reviews": {
+      "eyebrow": "Avis Google",
+      "heading": "Ce qu'on en dit",
+      "ratingSuffix": "sur Google",
+      "reviewsSuffix": "avis",
+      "viewOnGoogle": "Voir tous les avis sur Google"
+    },
+    "reservationCta": {
+      "eyebrow": "Tables & jeux",
+      "heading": "Réservez votre table",
+      "body": "Pour un déjeuner tranquille, une pause travail ou une table de jeu — réservez en quelques minutes, en ligne."
+    },
+    "location": {
+      "eyebrow": "Nous trouver",
+      "heading": "335, boul. Saint-Joseph",
+      "body": "En plein cœur de Gatineau, à deux pas des Galeries de Hull. Stationnement gratuit sur place et dans la rue.",
+      "mapTitle": "Carte — Café Aux Trois Licornes"
+    }
+  },
+  "menuPage": {
+    "eyebrow": "Notre carte",
+    "heading": "Le menu",
+    "intro": "Espresso soigné, plats maison et douceurs — préparés sur place, à savourer sur place ou à emporter.",
+    "searchLabel": "Rechercher dans le menu",
+    "searchPlaceholder": "Rechercher un plat, une boisson…",
+    "popular": "Populaire",
+    "noResults": "Aucun résultat pour « {query} ». Essayez un autre terme.",
+    "resultsCount": "{count, plural, =0 {Aucun résultat} =1 {1 résultat} other {# résultats}}",
+    "priceNote": "Prix sujets à changement. Informez-nous de toute allergie ou restriction alimentaire.",
+    "metaTitle": "Menu",
+    "metaDescription": "La carte complète du Café Aux Trois Licornes à Gatineau : cafés, sandwichs, viennoiseries et desserts maison, avec les prix."
+  },
+  "aboutPage": {
+    "eyebrow": "À propos",
+    "heading": "Notre histoire",
+    "intro": "Un café pensé comme un lieu de vie, né d'une histoire de famille et d'une envie simple : ralentir.",
+    "metaTitle": "À propos",
+    "metaDescription": "L'histoire du Café Aux Trois Licornes à Gatineau : une aventure familiale, un décor vintage chiné pièce par pièce et une communauté accueillante.",
+    "storyHeading": "Trois enfants, un café",
+    "storyBody1": "Ouvert en juin 2025 par Matthieu Maurice, Café Aux Trois Licornes tient son nom de ses trois enfants — une façon poétique de leur dédier son tout premier vrai pied-à-terre. Chaque meuble, chaque objet a été choisi avec soin : rien n'est acheté en série, tout est chiné, dépareillé, vivant.",
+    "storyBody2": "Au fil des mois, la salle continue d'évoluer : un piano, un petit train miniature qui ravit petits et grands, et un mur d'art qui prend forme au 2e étage, une pièce à la fois.",
+    "storyImageLabel": "Photo à venir — coin lecture ou détail vintage",
+    "founderLabel": "Fondateur",
+    "founderName": "Matthieu Maurice",
+    "founderBody": "Matthieu accueille encore aujourd'hui les habitués en personne, du service au comptoir jusqu'à un coup de main pour monter une poussette à l'étage.",
+    "founderImageLabel": "Photo à venir — le fondateur",
+    "valuesHeading": "Ce qui nous anime",
+    "values": [
+      {
+        "title": "Un rythme différent",
+        "body": "Pas de presse ici. Pour un café rapide ou une après-midi de jeux, le temps s'étire."
+      },
+      {
+        "title": "Fait maison",
+        "body": "Sandwichs, plats et desserts préparés sur place, avec des produits choisis avec soin."
+      },
+      {
+        "title": "Un espace pour tous",
+        "body": "Une communauté chaleureuse, ouverte à tous et reconnue comme un espace sécuritaire pour la communauté LGBTQ+."
+      }
+    ]
+  },
+  "galleryPage": {
+    "eyebrow": "Galerie",
+    "heading": "Un aperçu des lieux",
+    "intro": "Chineries vintage, coins à jouer et bonnes choses à manger — une salle qui continue d'évoluer, une pièce à la fois.",
+    "metaTitle": "Galerie",
+    "metaDescription": "Un aperçu en photos du Café Aux Trois Licornes à Gatineau : décor vintage, coin piano, tables de jeu et créations maison."
+  },
+  "reviewsPage": {
+    "eyebrow": "Avis Google",
+    "heading": "Ce qu'on en dit",
+    "intro": "Des avis authentiques, laissés par nos clients sur Google — reproduits ici avec attribution.",
+    "metaTitle": "Avis",
+    "metaDescription": "Découvrez les avis Google du Café Aux Trois Licornes à Gatineau : 4,6 sur 5 pour le café, l'ambiance vintage et l'accueil.",
+    "ratingSuffix": "sur Google",
+    "reviewsSuffix": "avis",
+    "viewOnGoogle": "Voir tous les avis sur Google"
+  },
+  "contactPage": {
+    "eyebrow": "Contact",
+    "heading": "Nous joindre",
+    "intro": "Une question ou une réservation de groupe ? Voici comment nous joindre.",
+    "metaTitle": "Contact",
+    "metaDescription": "Adresse, téléphone, courriel, horaire et itinéraire pour visiter le Café Aux Trois Licornes au 335 boul. Saint-Joseph, Gatineau.",
+    "addressLabel": "Adresse",
+    "phoneLabel": "Téléphone",
+    "emailLabel": "Courriel",
+    "hoursLabel": "Horaire",
+    "parkingLabel": "Stationnement",
+    "parkingBody": "Stationnement gratuit sur place et dans la rue.",
+    "mapTitle": "Carte — Café Aux Trois Licornes"
+  },
+  "privacyPage": {
+    "eyebrow": "Confidentialité",
+    "heading": "Politique de confidentialité",
+    "intro": "Cette page explique quels renseignements personnels nous recueillons via ce site, pourquoi, et comment ils sont protégés.",
+    "metaTitle": "Politique de confidentialité",
+    "metaDescription": "Politique de confidentialité du Café Aux Trois Licornes : renseignements recueillis lors d'une réservation, conservation et droits des clients.",
+    "updated": "Dernière mise à jour : 30 août 2026",
+    "sections": [
+      {
+        "heading": "Renseignements recueillis",
+        "body": "Lorsque vous effectuez une réservation en ligne, nous recueillons votre nom, votre courriel, votre numéro de téléphone, le nombre de convives, la date et l'heure souhaitées, ainsi que toute note facultative que vous ajoutez. Aucun renseignement financier n'est demandé sur ce site."
+      },
+      {
+        "heading": "Utilisation des renseignements",
+        "body": "Ces renseignements servent uniquement à gérer votre réservation : confirmation, rappel, modification ou annulation. Nous ne les utilisons pas à des fins publicitaires et ne les revendons jamais."
+      },
+      {
+        "heading": "Conservation et hébergement",
+        "body": "Les réservations sont conservées dans une base de données sécurisée, hébergée par nos fournisseurs technologiques (Vercel et Neon), pour la durée nécessaire à la gestion du service et à nos obligations comptables, puis supprimées ou anonymisées."
+      },
+      {
+        "heading": "Partage avec des tiers",
+        "body": "Vos renseignements ne sont partagés qu'avec les fournisseurs de services strictement nécessaires au fonctionnement du site (hébergement, base de données, envoi de courriels transactionnels). Aucun de ces fournisseurs n'est autorisé à les utiliser à ses propres fins."
+      },
+      {
+        "heading": "Témoins (cookies)",
+        "body": "Ce site utilise uniquement des témoins techniques essentiels (par exemple, pour retenir votre choix de langue). Aucun témoin publicitaire ou de suivi tiers n'est utilisé à l'heure actuelle."
+      },
+      {
+        "heading": "Vos droits",
+        "body": "Conformément à la Loi sur la protection des renseignements personnels dans le secteur privé (Québec), vous pouvez demander l'accès, la rectification ou la suppression de vos renseignements en nous écrivant à info@troislicornes.com."
+      }
+    ],
+    "disclaimer": "Cette page est fournie à titre informatif et ne constitue pas un avis juridique."
+  },
+  "reservationPage": {
+    "eyebrow": "Réservation",
+    "heading": "Réserver une table",
+    "intro": "Pour un déjeuner tranquille, une pause travail ou une table de jeu. Réponse rapide par courriel.",
+    "metaTitle": "Réservation",
+    "metaDescription": "Réservez une table au Café Aux Trois Licornes à Gatineau, en ligne et en quelques minutes.",
+    "whenHeading": "Quand",
+    "detailsHeading": "Vos coordonnées",
+    "dateLabel": "Date",
+    "partySizeLabel": "Nombre de convives",
+    "timeLabel": "Heure",
+    "timeLoading": "Recherche des disponibilités…",
+    "noSlots": "Aucune disponibilité pour cette date. Essayez une autre date ou un autre nombre de convives.",
+    "selectDatePrompt": "Choisissez une date pour voir les heures disponibles.",
+    "fullNameLabel": "Nom complet",
+    "emailLabel": "Courriel",
+    "phoneLabel": "Téléphone",
+    "notesLabel": "Notes (facultatif)",
+    "notesPlaceholder": "Allergies, occasion spéciale, table de jeu…",
+    "consentLabel": "J'accepte que mes renseignements soient utilisés pour traiter cette réservation, conformément à la politique de confidentialité.",
+    "privacyLink": "politique de confidentialité",
+    "submitLabel": "Confirmer la demande",
+    "submittingLabel": "Envoi en cours…",
+    "successHeading": "Demande envoyée !",
+    "successBody": "Merci {name} ! Nous avons bien reçu votre demande pour {count, plural, =1 {1 personne} other {# personnes}} le {date} à {time}. Un courriel de confirmation vous attend à {email}.",
+    "newRequest": "Faire une nouvelle demande",
+    "errorValidation": "Veuillez corriger les champs en surbrillance.",
+    "errorRateLimited": "Trop de tentatives. Veuillez réessayer dans quelques minutes ou nous appeler directement.",
+    "errorUnavailable": "Cette date n'est plus disponible. Veuillez choisir une autre date.",
+    "errorFull": "Ce créneau vient d'être complété. Veuillez choisir une autre heure.",
+    "errorServer": "Une erreur est survenue. Veuillez réessayer ou nous appeler directement.",
+    "errorDemoHeading": "Réservations en ligne bientôt disponibles",
+    "errorDemoBody": "Ce site est actuellement une démonstration : les réservations en ligne ne sont pas encore activées. Pour réserver dès maintenant, appelez-nous au {phone}.",
+    "callUs": "Appeler le café"
+  }
+}
