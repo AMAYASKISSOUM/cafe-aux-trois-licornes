@@ -3,39 +3,49 @@
 ## Current state
 
 - **Vercel project**: linked — `amayaskissoums-projects/cafe-aux-trois-licornes`
-- **Production URL**: recorded at the bottom of this file once the first deploy completes
-- **Database (Neon)**: not yet provisioned — pending marketplace terms acceptance (see below)
-- **Auth (Clerk)**: not yet provisioned — pending marketplace terms acceptance
-- **Email (Resend)**: not yet provisioned — pending marketplace terms acceptance
+- **Production URL**: https://cafe-aux-trois-licornes.vercel.app — **live**
+- **Database (Neon)**: **provisioned and live** — schema pushed, seeded with verified
+  business data, a real reservation write was tested end-to-end and confirmed in Postgres.
+- **Auth (Clerk)**: **provisioned and live** — `clerkMiddleware()` wired into `proxy.ts`,
+  `ADMIN_EMAILS` set, a real admin user created and password-auth confirmed working. It's
+  a Clerk **Development instance**; promote to Production in the Clerk dashboard when
+  ready for real customer-facing use (higher usage limits, removes the "Development mode"
+  badge on the sign-in page).
+- **Email (Resend)**: **not provisioned** — blocked on owning a custom domain (Resend
+  requires DNS TXT/DKIM verification for a domain you control; this project only has the
+  default `*.vercel.app` domain so far). This is a business decision (buy a domain) for
+  the owner, not something to infer. Reservation emails no-op gracefully with a log line
+  in the meantime — confirmed a real reservation still completes successfully without them.
 
-The site is fully deployable and functional in this state: the public site works from
-verified static data, the reservation form shows an honest "demo mode" message instead of
-pretending to book a table, and `/admin` shows a "not configured" message instead of
-crashing. See `docs/PROJECT_STATUS.md` for the full picture.
+The site is fully deployable and functional in this state: the public site and reservation
+system run against the live database, admin auth works, and only outbound email is
+pending a domain purchase. See `docs/PROJECT_STATUS.md` for the full picture, including
+exactly what was and wasn't independently re-verified after provisioning.
 
-## One-time step required before the backend works: accept marketplace terms
+## Provisioning Neon, Clerk, and Resend (Neon + Clerk already done)
 
-Three Vercel Marketplace integrations were installed via `vercel integration add`, but
-each one requires a one-time terms acceptance **in a browser**, which a CLI/agent cannot
-do on your behalf. Open each link, sign in with the Vercel account that owns this project,
+Each Vercel Marketplace integration needs a one-time terms acceptance **in a browser**,
+which a CLI/agent can't do on your behalf — this was the blocker for Neon and Clerk, now
+resolved. To add another integration later (or if starting over on a fresh Vercel
+project), open the relevant link, sign in with the Vercel account that owns the project,
 and accept:
 
-- Neon (database): `vercel.com/amayaskissoums-projects/~/integrations/accept-terms/neon`
-- Clerk (admin auth): `vercel.com/amayaskissoums-projects/~/integrations/accept-terms/clerk`
-- Resend (email): `vercel.com/amayaskissoums-projects/~/integrations/accept-terms/resend`
+`vercel.com/<team>/~/integrations/accept-terms/<neon|clerk|resend>`
 
-After accepting, re-run the install and it provisions automatically (creates the database,
-creates the Clerk application, creates the Resend API key) and writes the resulting
-environment variables onto the Vercel project:
+Then provision (Resend additionally needs a domain you control):
 
 ```bash
 vercel integration add neon
 vercel integration add clerk
-vercel integration add resend
+vercel integration add resend -m domain=<yourdomain.com> -m region=us-east-1
 vercel env pull .env.local
 ```
 
-Then apply the schema and seed verified business data:
+`resend` will open a browser for DNS verification — add the TXT/DKIM records it shows at
+your domain registrar, wait for verification, then it's ready.
+
+Then apply the schema and seed verified business data (already done for the current
+database — only needed again for a fresh one):
 
 ```bash
 npm run db:push
@@ -59,7 +69,7 @@ See `.env.example` for the full list with inline comments. Summary:
 | Variable | Required for | Source |
 |---|---|---|
 | `DATABASE_URL` | Reservations, admin dashboard, hours editing | Neon (via Marketplace) |
-| `CLERK_SECRET_KEY`, `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Admin login | Clerk (via Marketplace) |
+| `CLERK_SECRET_KEY`, `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `NEXT_PUBLIC_CLERK_SIGN_IN_URL` | Admin login | Clerk (via Marketplace); sign-in URL is set to `/admin/sign-in` |
 | `ADMIN_EMAILS` | Admin authorization (allowlist) | You choose |
 | `RESEND_API_KEY`, `RESEND_FROM_EMAIL` | Reservation emails | Resend (via Marketplace) |
 | `BLOB_READ_WRITE_TOKEN` | Future image uploads (gallery/menu admin) | `vercel integration add blob` (not yet installed — not needed until upload features are built) |
@@ -154,6 +164,9 @@ the A/CNAME records it gives you at your registrar). Then set
 `NEXT_PUBLIC_SITE_URL=https://cafetroislicornes.com` in the Vercel project's environment
 variables and redeploy so canonical URLs and structured data use the real domain.
 
+**This same domain purchase also unblocks Resend** (see the provisioning section above) —
+worth doing both at once rather than as two separate trips.
+
 ## Ownership transfer checklist
 
 If the café buys this project, everything below can move to accounts they control without
@@ -205,3 +218,24 @@ live site (Lighthouse + manual testing), each redeployed and reverified.
   reservation form shows the "demo mode" message on submit, `/admin` shows "not
   configured". Once Neon/Clerk/Resend are provisioned and `vercel env pull` + redeploy
   happen, this becomes fully live with no further code changes.
+
+**2026-08-30 (later same day)** — Neon and Clerk provisioned after the owner accepted
+marketplace terms; two more fixes and a live end-to-end test.
+- Neon: schema pushed (`drizzle-kit push`), seeded (`npm run db:seed`) — verified by
+  direct query (7 opening-hours rows, 7 categories, 45 items, business_settings correct).
+- Clerk: provisioned, `ADMIN_EMAILS` set, a real admin user created via the Backend API.
+  Found and fixed a real bug this exposed: `/admin` 500'd immediately (`auth()` called
+  without `clerkMiddleware()` having run — `proxy.ts`'s matcher excluded `/admin`, which
+  was correct *before* Clerk existed but not after). Fixed by wrapping the app in
+  `clerkMiddleware()`, protecting `/admin/**` except `/admin/sign-in`. Redeployed,
+  reverified: unauthenticated `/admin` now correctly redirects to sign-in, and password
+  authentication succeeds for the real admin account.
+- **Live reservation test**: submitted a real reservation through the production form —
+  confirmed in Postgres with correct data and correct UTC conversion of the Gatineau
+  local time. Then seeded a second reservation to fill the same slot to exactly its
+  capacity limit and confirmed the aggregate query the capacity check depends on returns
+  the right number. Test data deleted afterward.
+- Resend: attempted provisioning, blocked on requiring a verified custom domain (see
+  Current State above) — this needs the owner to buy/point a domain, so left for later
+  rather than guessing a placeholder.
+- Latest commit: `693e5f1`. Full current status in `docs/PROJECT_STATUS.md`.

@@ -17,21 +17,41 @@ when the code merely exists — see the notes under each for what "works" means 
 
 ## Milestone 2 — Functional system
 
-- [x] Database schema — `src/db/schema.ts` (Drizzle), lazy client, never crashes the build without `DATABASE_URL`
-- [x] Reservation system — multi-field form, server-side Zod validation, atomic capacity-safe insert (Postgres advisory lock + single-statement conditional insert), rate limiting, honeypot
+- [x] Database — **live Neon Postgres**, schema pushed, seeded with verified business
+      data. Confirmed by direct query: `business_settings`, all 7 `opening_hours` rows, 7
+      `menu_categories`, 45 `menu_items`.
+- [x] Reservation system — **tested end-to-end against production with a real submission**:
+      filled and submitted the live form in-browser, confirmed the row landed in Postgres
+      with the correct fields and a correctly timezone-converted `starts_at`/`ends_at`
+      (12:00 Gatineau time on a September date → `16:00Z`/`17:00Z`, i.e. EDT correctly
+      applied). Then seeded a second reservation directly to bring the same slot to
+      exactly `max_covers_per_slot` (20) and confirmed the aggregate query the capacity
+      check relies on reports the right total. Test data deleted after. The one piece
+      *not* independently re-verified live is the exact concurrent-race behavior of the
+      advisory-lock insert (inherently hard to demonstrate outside a real concurrent-load
+      test) — the logic is unit-reasoned and code-reviewed, not load-tested.
 - [x] Availability engine — pure functions, **32 passing unit tests** covering closed days, blackout dates, special hours, advance-notice window, capacity boundaries
-- [ ] **Reservation system tested against a live database** — the form, validation, and demo-mode fallback are verified working end-to-end in-browser; the actual insert path, capacity enforcement, and email sends have **not** been exercised against a real Postgres instance yet, because Neon isn't provisioned (see below). Code review confidence is high; this is not the same as verified.
-- [x] Admin — Clerk-gated `/admin`, dashboard (today's stats + upcoming), reservations list (filter/search/status actions), hours editor (weekly schedule + special/holiday hours)
-- [ ] **Admin tested against a live login** — cannot be exercised until Clerk is provisioned; the "not configured" fallback state is verified working.
+- [x] Admin auth — Clerk is live. Verified: created a real admin user via the Clerk
+      Backend API, confirmed `/admin` correctly redirects an unauthenticated visitor to
+      `/admin/sign-in` (proxy + `auth.protect()` working), and confirmed password
+      authentication succeeds (reached Clerk's post-password email-verification step,
+      which needs the actual account owner's inbox to finish — see Known Issues).
+      Clerk is currently a **Development instance** (shows a "Development mode" badge) —
+      fine for this demo phase, one-click promotion to Production in the Clerk dashboard
+      before real customer-facing use.
+- [ ] **Admin dashboard/reservations/menu/hours pages clicked through while fully signed
+      in** — not completed in this session (the interactive email-verification step
+      can't be finished by an agent — see Known Issues). The auth *gate* is proven
+      correct; the pages behind it are simple, already-typechecked Drizzle
+      queries + JSX that share code paths with what's already been tested, but haven't
+      been eyeballed live post-login.
 - [x] Menu admin — create/edit/delete categories and items (name/description FR+EN,
       price, featured, available, display order) at `/admin/menu`. The public `/menu`
-      page and homepage featured-menu section now read from the database when it's
-      configured, falling back to the verified static data otherwise — so a price change
-      in admin shows up on the live site immediately, with no code change or reseed.
-      **Not yet tested against a live database** (same caveat as reservations/admin
-      generally — see below).
-- [ ] Gallery admin (upload/reorder images) — **not built**, same reasoning. Needs Vercel Blob wired up in addition to a DB table (schema for `gallery_images` already exists).
-- [x] Email architecture — Resend + React Email templates (received/confirmed/cancelled), graceful no-op with a log line when `RESEND_API_KEY` is unset. **Not yet sent for real** — needs Resend provisioned.
+      page and homepage featured-menu section read from the live database (confirmed —
+      the 45 seeded items are what's rendering on the live site right now), falling back
+      to static data only if the DB is ever unreachable.
+- [ ] Gallery admin (upload/reorder images) — **not built**. Needs Vercel Blob wired up in addition to a DB table (schema for `gallery_images` already exists).
+- [x] Email architecture — Resend + React Email templates (received/confirmed/cancelled), graceful no-op with a log line when `RESEND_API_KEY` is unset. **Resend is not provisioned** — it requires a verified custom domain (DNS TXT/DKIM records) for real sending, and this project only has the default `*.vercel.app` domain so far. Buying a domain is a business decision for the owner, not something to infer — see Credentials section. Confirmed the no-op path doesn't block a reservation from succeeding (the test submission above completed normally with no email configured).
 
 ## Milestone 3 — Polish
 
@@ -50,8 +70,17 @@ when the code merely exists — see the notes under each for what "works" means 
 
 ## Credentials / setup needed from you
 
-- [ ] Accept Neon, Clerk, and Resend marketplace terms (three browser clicks — links in `docs/DEPLOYMENT.md`), then re-run the installs so real credentials get provisioned.
-- [ ] Set `ADMIN_EMAILS` once you know which email(s) should have admin access.
+- [x] ~~Accept Neon, Clerk, and Resend marketplace terms~~ — Neon and Clerk done, both
+      provisioned and live. **Resend is blocked on owning a custom domain** (see above) —
+      buy/point a domain, then run `vercel integration add resend -m domain=<yourdomain>
+      -m region=us-east-1` and finish the DNS verification step it opens in the browser.
+- [x] ~~Set `ADMIN_EMAILS`~~ — set to `mayaskissoum@gmail.com` across all environments,
+      with a real Clerk account created for that address. **Sign in once at
+      `/admin/sign-in`** (password was set during testing — reset it via "Forgot
+      password?" if you don't have it handy) to finish email verification and confirm
+      you can reach the dashboard. Add more admin emails the same way: create/invite the
+      user in Clerk, add their email to `ADMIN_EMAILS` (comma-separated) in Vercel's
+      project settings, redeploy.
 - [ ] Confirm the Thursday closing-hour conflict (Google says midnight, the café's own site says 5 PM) — currently using the website's version. See `docs/BUSINESS_RESEARCH.md` §3.
 - [ ] Confirm the full current in-café menu (two items — cinnamon brioche, homemade muffins — appear on Google but not on either delivery platform, so they were left out rather than guessed).
 - [ ] Provide real photography — see `docs/PHOTO_SHOT_LIST.md` for the full shot list; the site is fully navigable with placeholders in the meantime.
@@ -80,3 +109,18 @@ when the code merely exists — see the notes under each for what "works" means 
   uploads in addition to the DB table (schema already exists). The owner would currently
   ask the developer to add gallery photos rather than doing it themselves. Menu admin
   *is* built (see above), so this is now the main remaining functionality gap.
+- **Fixed during this round of testing**: the moment Clerk was provisioned, `/admin`
+  started 500ing in production — `auth()` requires `clerkMiddleware()` to have run for
+  the request, and `proxy.ts`'s matcher deliberately excluded `/admin` (written before
+  Clerk existed, so it couldn't have worked yet — this was a known, documented deferred
+  step, not a surprise). Fixed by wrapping the whole app in `clerkMiddleware()` and
+  protecting everything under `/admin` except `/admin/sign-in`.
+- **Admin sign-in email verification wasn't completed by the agent**: Clerk asks for an
+  emailed verification code on a new sign-in. Sending it works (Clerk's own tested UI
+  flow); typing the code back in requires access to the actual inbox, which the agent
+  doesn't have for `mayaskissoum@gmail.com` in this session. Sign in once yourself to
+  finish this — after that, Clerk won't ask again from a recognized device/browser.
+- **Clerk is a Development instance**, not Production — you'll see a "Development mode"
+  badge on the sign-in page and a related console warning. Fine for showing this as a
+  demo; promote to Production in the Clerk dashboard (one click) before relying on it for
+  the real business, since Development instances have tighter usage limits.

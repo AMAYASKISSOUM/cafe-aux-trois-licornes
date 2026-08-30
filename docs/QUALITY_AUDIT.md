@@ -103,13 +103,34 @@ given the scope already covered in this session:
   production domain (via `VERCEL_PROJECT_PRODUCTION_URL`, not a hardcoded value) and
   hreflang alternates point at the correct localized paths.
 
-## Not verified (needs live credentials — see docs/PROJECT_STATUS.md)
+## Update: live database + auth testing (2026-08-30, later same day)
 
-- Reservation insert path, capacity enforcement, and email sending against a real database
-  (Neon not yet provisioned — pending marketplace terms acceptance).
-- Admin login and dashboard against a real Clerk session.
-- Live Google Reviews adapter (falls back to verified static data, by design, until an
-  API key exists).
+Neon and Clerk were provisioned after this audit's first pass. Re-tested against
+production with real credentials rather than re-running the demo-mode checks above:
+
+- **Reservation insert path**: submitted a real reservation through the live form.
+  Confirmed in Postgres — correct fields, and `starts_at`/`ends_at` correctly converted
+  from Gatineau local time to UTC (12:00 local in September → `16:00Z`, i.e. EDT
+  correctly applied, not a fixed UTC offset). Then seeded a second row directly to bring
+  that slot's total to exactly `max_covers_per_slot` and confirmed the SQL aggregate the
+  capacity check reads from reports the right number. Test rows deleted after.
+- **Admin auth**: created a real Clerk user via the Backend API, confirmed an
+  unauthenticated visit to `/admin` redirects to `/admin/sign-in` (this exposed a real
+  bug — see below), and confirmed password authentication succeeds. Did not complete the
+  post-password email-verification step (needs the actual account owner's inbox, not
+  available to the agent) or click through the dashboard while fully signed in.
+- **Bug found and fixed**: the moment Clerk went live, `/admin` started 500ing —
+  `auth()` requires `clerkMiddleware()` to have run for the request, and `proxy.ts`'s
+  matcher still excluded `/admin` (correct before Clerk existed, stale after). Fixed,
+  redeployed, reverified.
+- **Not yet independently verified**: the advisory-lock insert's behavior under genuine
+  *concurrent* load (two requests racing for the same slot at the same instant) — the
+  test above confirms the aggregate math is correct, not the lock's race behavior, which
+  is inherently hard to demonstrate outside a real concurrency test. Admin
+  dashboard/reservations/menu/hours pages rendering correctly while fully signed in.
+  Resend email sending (blocked on a domain purchase — see `docs/DEPLOYMENT.md`). Live
+  Google Reviews adapter (falls back to verified static data, by design, until an API key
+  exists).
 
 ## Security review
 
