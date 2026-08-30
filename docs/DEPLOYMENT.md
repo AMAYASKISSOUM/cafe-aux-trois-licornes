@@ -187,4 +187,13 @@ credential is an environment variable.
 
 ## Deployment log
 
-<!-- Updated after each production deploy -->
+**2026-08-30** — First production deploy.
+- URL: **https://cafe-aux-trois-licornes.vercel.app**
+- Commit: `a8baf1e`
+- Status: READY. All routes verified 200 (public pages, both locales, `/reservation`,
+  `/admin`, `sitemap.xml`, `robots.txt`). Zero console errors on the live site.
+- Database/auth/email are not provisioned yet (pending the marketplace terms acceptance
+  above), so the site is running in its graceful-fallback state: static menu/hours data,
+  reservation form shows the "demo mode" message on submit, `/admin` shows "not
+  configured". Once Neon/Clerk/Resend are provisioned and `vercel env pull` + redeploy
+  happen, this becomes fully live with no further code changes.

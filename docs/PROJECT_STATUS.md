@@ -35,7 +35,7 @@ when the code merely exists — see the notes under each for what "works" means 
 - [x] Tests — 32 Vitest tests (availability engine, menu data logic, reservation schema validation)
 - [x] Lint / typecheck / production build — all clean as of this writing
 - [ ] Lighthouse scores — **not measured with the Lighthouse tool itself** (unavailable in this environment); see `docs/QUALITY_AUDIT.md` for what was checked instead and why the architecture should score well.
-- [ ] Deployment — see `docs/DEPLOYMENT.md` for current state.
+- [x] Deployment — **live at https://cafe-aux-trois-licornes.vercel.app** (production, verified 200 on every route). See `docs/DEPLOYMENT.md`.
 
 ## Credentials / setup needed from you
 
