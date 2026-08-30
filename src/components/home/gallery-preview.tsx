@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations, getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/container";
@@ -39,8 +40,12 @@ export async function GalleryPreview() {
         {/* Mobile: horizontal snap strip */}
         <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:hidden">
           {images.map((img) => (
-            <div key={img.slug} className="aspect-[4/5] w-[72vw] flex-none snap-start">
-              <ImagePlaceholder label={localized(img.label, locale)} className="h-full w-full" />
+            <div key={img.slug} className="relative aspect-[4/5] w-[72vw] flex-none snap-start overflow-hidden bg-parchment-deep">
+              {img.src ? (
+                <Image src={img.src} alt={localized(img.label, locale)} fill sizes="72vw" className="object-cover" />
+              ) : (
+                <ImagePlaceholder label={localized(img.label, locale)} className="h-full w-full" />
+              )}
             </div>
           ))}
         </div>
@@ -51,8 +56,21 @@ export async function GalleryPreview() {
           style={{ gridAutoFlow: "dense" }}
         >
           {images.map((img, i) => (
-            <RevealItem key={img.slug} className={cn("h-full w-full", MOSAIC_SPANS[i % MOSAIC_SPANS.length])}>
-              <ImagePlaceholder label={localized(img.label, locale)} className="h-full w-full" />
+            <RevealItem
+              key={img.slug}
+              className={cn("relative overflow-hidden bg-parchment-deep", MOSAIC_SPANS[i % MOSAIC_SPANS.length])}
+            >
+              {img.src ? (
+                <Image
+                  src={img.src}
+                  alt={localized(img.label, locale)}
+                  fill
+                  sizes="(min-width: 640px) 45vw, 100vw"
+                  className="object-cover"
+                />
+              ) : (
+                <ImagePlaceholder label={localized(img.label, locale)} className="h-full w-full" />
+              )}
             </RevealItem>
           ))}
         </RevealGroup>

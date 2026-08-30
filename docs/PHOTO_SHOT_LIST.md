@@ -1,6 +1,70 @@
 # Photo Shot List — Café Aux Trois Licornes
 
-Every image slot currently rendered as a placeholder, with the exact filename it expects,
+## Status update (2026-08-30, later same day): real photos wired in
+
+The owner supplied 27 real photos (from `C:\Users\mayas\Downloads\photo`) plus the
+official logo. Every photo was inspected manually; 14 of the 27 are now wired into the
+site (some slots were relabeled to honestly match what a photo actually shows, rather
+than force it into the original placeholder's caption — noted below). This section
+records what actually shipped; the rest of this document is the **original planning
+shot list** and is kept for the slots still unfilled (see "Still needed" below).
+
+**Actual mapping used** (source file → destination):
+
+| Source (original filename) | Used for | Real file at |
+|---|---|---|
+| `logo resturant.png` | Header + footer logo (background removed; a second cream-ink variant generated for the dark footer) | `public/images/brand/logo.png`, `logo-on-dark.png` |
+| `photo1.jpeg` | Homepage hero (exterior facade — explicit instruction overrode the original interior-shot plan below) | `public/images/hero/hero-facade.jpg` |
+| `IMG_3675.jpeg` (staff at counter) | Homepage intro ("Born from a family story") | `public/images/about/team-counter.jpg` |
+| `IMG_3683.jpeg` (piano, pink chair, games cabinet, art) | About page story image | `public/images/about/piano-corner.jpg` |
+| `IMG_3677.jpeg` (games cabinet, room) | Homepage experience band **and** gallery (only authentic game-table-adjacent shot; two different crops, two different pages) | `public/images/interior/games-cabinet.jpg` |
+| `IMG_3676.jpeg` (latte, leaf art) | Featured menu — café latte | `public/images/drinks/cafe-latte.jpg` |
+| `IMG_3684.jpeg` (smoothie) | Gallery (relabeled from "latte-art" — see below) | `public/images/drinks/smoothie.jpg` |
+| `IMG_3674.jpeg` (croissant display case) | Featured menu — croissant aux amandes | `public/images/food/croissant-amandes.jpg` |
+| `IMG_3686.jpeg` (wrap césar) | Featured menu — wrap césar | `public/images/food/wrap-cesar.jpg` |
+| `IMG_3688.jpeg` (smoked salmon sandwich) | Featured menu — sandwich saumon fumé | `public/images/food/sandwich-saumon-fume.jpg` |
+| `IMG_3687.jpeg` (crookie) | Gallery (relabeled from "mur-art") | `public/images/food/crookie.jpg` |
+| `IMG_3697.jpeg` (main room, art wall) | Gallery — salle principale | `public/images/gallery/salle-principale.jpg` |
+| `IMG_3700.jpeg` (piano + ceiling toy train + window) | Gallery — piano | `public/images/gallery/piano.jpg` |
+| `IMG_3695.jpeg` (winter exterior, snow) | Gallery — façade | `public/images/gallery/facade.jpg` |
+| `IMG_3696.jpeg` (counter, dual pastry cases) | Gallery — comptoir des desserts | `public/images/gallery/comptoir-desserts.jpg` |
+| `IMG_3693.jpeg` (standee sign, tagline) | Gallery (relabeled from "train-miniature") | `public/images/gallery/sign-board.jpg` |
+| `IMG_3692.jpeg` (counter + chalkboard menu) | `/menu` page header background | `public/images/menu/counter-board.jpg` |
+
+**Gallery labels changed from the original plan** (the photo set had no shot for these
+exact subjects — relabeled to honestly describe what's actually shown, per the "editorial
+restraint" instruction, rather than caption a photo as something it isn't):
+- "Latte art" → **"Notre smoothie maison" / "Our house smoothie"**
+- "Table de jeu" (game mid-play) → **"Coin jeux de société" / "Board game corner"**
+- "Mur d'art, 2e étage" → **"Une pause gourmande" / "A sweet treat"** (no photo confirms
+  which room is the 2nd floor, so the floor-specific claim was dropped, not just the image)
+- "Le petit train" → **"L'esprit de la maison" / "The house spirit"**
+
+**Still needed from the owner** (see `docs/PROJECT_STATUS.md`):
+- A portrait of Matthieu (the founder) — no photo in the supplied set is verifiably him,
+  so both founder-photo slots (`home.intro` can use a team photo instead and does; the
+  About page's dedicated founder portrait cannot honestly reuse an unverified face) are
+  either filled with a generic team photo or left as placeholder.
+- Dedicated product shots for **cappuccino** and **croissant jambon-fromage** — the two
+  remaining featured-menu placeholders.
+
+**Not used this pass** (spares, still available in `C:\Users\mayas\Downloads\photo`):
+`IMG_3678` (grilled cheese), `IMG_3679`/`IMG_3680` (staff holding Italian/pesto-chicken
+sandwiches), `IMG_3681` (cookies), `IMG_3682` (hot drink), `IMG_3689` (chocolate pastries),
+`IMG_3690` (grain salad), `IMG_3691` (soup), `IMG_3699` (summer exterior sign). Kept
+deliberately unused rather than overloading the site with every available image.
+
+**A real in-café menu board was also photographed** (`IMG_3698.jpeg` — not used as a site
+image, but read as a data source) — it differs from `src/lib/menu-data.ts` in ways worth
+the owner's attention (new "Croffle" category, several price differences, resolves the
+cinnamon-brioche/muffins question from `docs/BUSINESS_RESEARCH.md` §3). Not applied to the
+database in this pass — see `docs/PROJECT_STATUS.md`.
+
+---
+
+## Original planning shot list
+
+Every image slot originally rendered as a placeholder, with the exact filename it expects,
 where it appears, and how to shoot/crop it. Drop files into the matching `public/images/*`
 folder using the filename below (or update the `src` in the listed source file) and the
 placeholder is automatically replaced — no other code changes needed.

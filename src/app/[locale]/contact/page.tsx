@@ -39,7 +39,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
         <div className="flex flex-col gap-10">
           <dl className="flex flex-col gap-6">
             <div className="flex items-start gap-3.5">
-              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brass-ink" aria-hidden />
+              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-petrol-ink" aria-hidden />
               <div>
                 <dt className="text-xs font-medium uppercase tracking-wide text-ink-faint">{t("addressLabel")}</dt>
                 <dd className="mt-1 text-ink-soft">
@@ -53,7 +53,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             </div>
 
             <div className="flex items-start gap-3.5">
-              <Phone className="mt-0.5 h-5 w-5 shrink-0 text-brass-ink" aria-hidden />
+              <Phone className="mt-0.5 h-5 w-5 shrink-0 text-petrol-ink" aria-hidden />
               <div>
                 <dt className="text-xs font-medium uppercase tracking-wide text-ink-faint">{t("phoneLabel")}</dt>
                 <dd className="mt-1">
@@ -65,7 +65,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             </div>
 
             <div className="flex items-start gap-3.5">
-              <Mail className="mt-0.5 h-5 w-5 shrink-0 text-brass-ink" aria-hidden />
+              <Mail className="mt-0.5 h-5 w-5 shrink-0 text-petrol-ink" aria-hidden />
               <div>
                 <dt className="text-xs font-medium uppercase tracking-wide text-ink-faint">{t("emailLabel")}</dt>
                 <dd className="mt-1">
@@ -77,7 +77,7 @@ export default async function ContactPage({ params }: PageProps<"/[locale]/conta
             </div>
 
             <div className="flex items-start gap-3.5">
-              <ParkingSquare className="mt-0.5 h-5 w-5 shrink-0 text-brass-ink" aria-hidden />
+              <ParkingSquare className="mt-0.5 h-5 w-5 shrink-0 text-petrol-ink" aria-hidden />
               <div>
                 <dt className="text-xs font-medium uppercase tracking-wide text-ink-faint">{t("parkingLabel")}</dt>
                 <dd className="mt-1 text-ink-soft">{t("parkingBody")}</dd>

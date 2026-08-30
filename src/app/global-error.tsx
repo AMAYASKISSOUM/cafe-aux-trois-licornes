@@ -33,7 +33,7 @@ export default function GlobalError({
         }}
       >
         <div style={{ maxWidth: 420 }}>
-          <p style={{ fontSize: 13, letterSpacing: 2, textTransform: "uppercase", color: "#7a5424" }}>
+          <p style={{ fontSize: 13, letterSpacing: 2, textTransform: "uppercase", color: "#1f4844" }}>
             Café Aux Trois Licornes
           </p>
           <h1 style={{ fontSize: 28, margin: "12px 0" }}>
@@ -51,7 +51,7 @@ export default function GlobalError({
               marginTop: 20,
               height: 44,
               padding: "0 24px",
-              backgroundColor: "#a23e28",
+              backgroundColor: "#2a5f5a",
               color: "#f6f0e4",
               border: "none",
               borderRadius: 4,

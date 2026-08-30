@@ -22,7 +22,7 @@ export async function SiteFooter() {
     <footer className="bg-espresso text-espresso-ink">
       <Container className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr] lg:py-20">
         <div className="flex flex-col gap-5">
-          <Wordmark dark />
+          <Wordmark dark size="lg" />
           <p className="max-w-xs text-sm leading-relaxed text-espresso-ink-soft">
             {t("tagline")}
           </p>

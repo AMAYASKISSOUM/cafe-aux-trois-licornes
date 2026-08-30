@@ -27,14 +27,14 @@ export async function LocationSection() {
 
           <dl className="flex flex-col gap-4 text-sm">
             <div className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brass-ink" aria-hidden />
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-petrol-ink" aria-hidden />
               <dd className="text-ink-soft">
                 {BUSINESS.address.street}, {BUSINESS.address.city} ({BUSINESS.address.region}){" "}
                 {BUSINESS.address.postalCode}
               </dd>
             </div>
             <div className="flex items-start gap-3">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brass-ink" aria-hidden />
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-petrol-ink" aria-hidden />
               <dd>
                 <a href={`tel:${BUSINESS.phone}`} className="text-ink-soft hover:text-ink">
                   {BUSINESS.phoneDisplay}

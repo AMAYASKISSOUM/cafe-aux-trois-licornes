@@ -3,10 +3,40 @@
 import { useSyncExternalStore } from "react";
 import { motion, type Variants } from "motion/react";
 
-const variants: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-};
+const EASE = [0.22, 1, 0.36, 1] as const;
+
+/**
+ * A few related but distinct reveal treatments so photos across the site
+ * don't all animate identically — a wide atmosphere shot reads better with
+ * a slow clip reveal than the same fade-up used for a portrait product
+ * shot. Pick per call site; default ("fade") preserves prior behavior.
+ */
+const revealVariants = {
+  fade: {
+    hidden: { opacity: 0, y: 18 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+  },
+  scale: {
+    hidden: { opacity: 0, scale: 1.045 },
+    show: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: EASE } },
+  },
+  clip: {
+    hidden: { opacity: 0.001, clipPath: "inset(0 0 100% 0)" },
+    show: { opacity: 1, clipPath: "inset(0 0 0% 0)", transition: { duration: 0.9, ease: EASE } },
+  },
+  "slide-left": {
+    hidden: { opacity: 0, x: -28 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.7, ease: EASE } },
+  },
+  "slide-right": {
+    hidden: { opacity: 0, x: 28 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.7, ease: EASE } },
+  },
+} satisfies Record<string, Variants>;
+
+export type RevealVariant = keyof typeof revealVariants;
+
+const variants: Variants = revealVariants.fade;
 
 const noopSubscribe = () => () => {};
 
@@ -28,10 +58,12 @@ export function Reveal({
   children,
   className,
   delay = 0,
+  variant = "fade",
 }: {
   children: React.ReactNode;
   className?: string;
   delay?: number;
+  variant?: RevealVariant;
 }) {
   const ready = useRevealReady();
   return (
@@ -40,7 +72,7 @@ export function Reveal({
       initial={ready ? "hidden" : false}
       whileInView={ready ? "show" : undefined}
       viewport={{ once: true, margin: "-80px" }}
-      variants={variants}
+      variants={revealVariants[variant]}
       transition={{ delay }}
     >
       {children}

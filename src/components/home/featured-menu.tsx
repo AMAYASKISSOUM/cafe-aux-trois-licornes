@@ -17,7 +17,7 @@ export async function FeaturedMenu() {
   const items = await getFeaturedMenuItems(6);
 
   return (
-    <section className="bg-parchment-deep py-20 sm:py-28">
+    <section className="bg-petrol-tint py-20 sm:py-28">
       <Container>
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <SectionHeading eyebrow={t("eyebrow")} heading={t("heading")} className="max-w-lg" />
@@ -32,10 +32,16 @@ export async function FeaturedMenu() {
               const name = localized(item.name, locale);
               return (
                 <li key={item.slug} className="flex flex-col gap-3">
-                  <Photo alt={name} label={name} ratio="1/1" />
+                  <Photo
+                    src={item.imageUrl}
+                    alt={name}
+                    label={name}
+                    ratio="1/1"
+                    sizes="(min-width: 1024px) 16vw, (min-width: 640px) 33vw, 50vw"
+                  />
                   <div className="flex flex-col gap-0.5">
                     <h3 className="font-display text-base leading-tight text-ink">{name}</h3>
-                    <p className="text-sm font-medium text-brass-ink">{formatPrice(item.price, locale)}</p>
+                    <p className="text-sm font-medium text-petrol-ink">{formatPrice(item.price, locale)}</p>
                   </div>
                 </li>
               );

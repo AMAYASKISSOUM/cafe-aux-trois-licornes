@@ -79,7 +79,7 @@ export function SiteHeader() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 border-b transition-[background-color,box-shadow,border-color] duration-[var(--duration-fast)]",
+          "animate-nav-reveal sticky top-0 z-50 border-b transition-[background-color,box-shadow,border-color] duration-[var(--duration-fast)]",
           scrolled || open
             ? "border-line bg-parchment/92 shadow-lift backdrop-blur-sm"
             : "border-transparent bg-parchment"
@@ -104,7 +104,7 @@ export function SiteHeader() {
                 {t(item.labelKey)}
                 <span
                   className={cn(
-                    "absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-rust transition-transform duration-[var(--duration-fast)]",
+                    "absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-petrol transition-transform duration-[var(--duration-fast)]",
                     active && "scale-x-100"
                   )}
                   aria-hidden

@@ -132,6 +132,56 @@ production with real credentials rather than re-running the demo-mode checks abo
   Google Reviews adapter (falls back to verified static data, by design, until an API key
   exists).
 
+## Update: photo integration pass — re-measured performance (2026-08-30, later same day)
+
+Real photography, the official logo, a new signature accent color, and a motion-system
+upgrade were added (see `docs/PROJECT_STATUS.md` for the full list). Lighthouse was
+re-run, but **against a local production build (`next start` on this machine), not the
+live Vercel deployment** — the original 92/64 scores above were measured against the real
+deploy, which benefits from Vercel's image CDN and edge caching that a local server can't
+reproduce. Treat the numbers below as a directional check, not a like-for-like comparison.
+
+| Run | Performance | Accessibility | Best Practices | SEO | LCP | CLS |
+|---|---|---|---|---|---|---|
+| Home, mobile, first visit (cold) | 38 | 100 | 100 | 92 | 7.3s | 0 |
+| Home, mobile, repeat visit (warm) | 55 | 100 | 100 | 92 | 5.8s | 0 |
+
+**Accessibility, Best Practices stayed clean** — no regression from the new colors, logo,
+or images. **SEO dropped 100 → 92** — not yet root-caused; likely a canonical/OG-URL audit
+reacting to being tested at `localhost` instead of the real domain (`NEXT_PUBLIC_SITE_URL`
+mismatch), not a real defect, but not independently confirmed — verify against the actual
+deploy before treating as fixed.
+
+**What's actually driving the lower Performance number** (found by reading the report, not
+guessed):
+
+1. **~2.1 seconds of it is a Clerk dev-instance "handshake" redirect happening on the
+   public homepage**, not anything to do with photos. Confirmed in the report's own
+   redirect-chain detail: `/` → `strong-urchin-910.clerk.accounts.dev/.../handshake` → `/`.
+   This is the same Development-instance quirk already documented above (the curl-vs-
+   browser `/admin` note) — except `clerkMiddleware()` wraps the *entire* app now, so every
+   route pays this cost on a browser's first-ever visit (no `__client_uat` cookie yet), not
+   just `/admin`. A repeat visit (cookie already set) skips it entirely — confirmed by
+   re-running Lighthouse against the same Chrome profile a second time. **This predates
+   this session** (introduced when `clerkMiddleware()` was wired in) and goes away once
+   Clerk is promoted to a Production instance, same as the existing curl note. Flagged
+   here rather than fixed — Clerk promotion is the owner's call, not a code change.
+2. **The hero and other photos are not the bottleneck.** Checked actual transferred sizes:
+   `hero-facade.jpg` serves at 42KB and `team-counter.jpg` at 57KB (both `w=750,q=75` via
+   Next's own image optimization) — small, appropriately sized, not the issue.
+3. Three `sizes` props were wrong and got fixed during this pass — the gallery masonry,
+   the featured-menu squares, and two other grid photos all previously claimed `100vw`
+   (Photo's default) while actually rendering at 33-50% of that, so the browser was
+   fetching larger image variants than needed. Next's own console flagged this directly.
+   Fixed by passing accurate `sizes` per grid breakpoint at each call site.
+4. The Google Maps embed's own scripts (`maps.googleapis.com`) account for ~320KB of
+   third-party JS on the homepage — pre-existing, unrelated to this pass.
+
+**Not done this pass**: re-measuring against the actual Vercel deployment (would need a
+deploy, which wasn't requested) and root-causing the SEO 92. Recommended next step:
+redeploy and re-run Lighthouse against the live URL for numbers directly comparable to the
+original audit above.
+
 ## Security review
 
 - Every mutation validated server-side with Zod (reservation form; the schema is rebuilt

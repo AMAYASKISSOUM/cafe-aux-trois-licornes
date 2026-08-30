@@ -56,7 +56,12 @@ export default async function MenuPage({ params, searchParams }: PageProps<"/[lo
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildMenuJsonLd(locale)) }}
       />
-      <PageHeader eyebrow={t("eyebrow")} heading={t("heading")} intro={t("intro")}>
+      <PageHeader
+        eyebrow={t("eyebrow")}
+        heading={t("heading")}
+        intro={t("intro")}
+        image={{ src: "/images/menu/counter-board.jpg", alt: t("coverImageAlt") }}
+      >
         <MenuSearchForm
           label={t("searchLabel")}
           placeholder={t("searchPlaceholder")}

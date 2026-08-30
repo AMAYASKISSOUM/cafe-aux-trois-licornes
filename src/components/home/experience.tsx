@@ -19,18 +19,21 @@ export async function Experience() {
         <Reveal>
           <SectionHeading eyebrow={t("eyebrow")} heading={t("heading")} align="center" />
         </Reveal>
-        <Reveal>
+        <Reveal variant="clip">
           <Photo
+            src="/images/interior/games-cabinet.jpg"
             alt={t("imageLabel")}
             label={t("imageLabel")}
             ratio="21/9"
+            imgClassName="object-[center_35%]"
             className="hidden sm:block"
+            sizes="(min-width: 1360px) 1360px, 100vw"
           />
         </Reveal>
         <RevealGroup className="grid grid-cols-1 gap-10 sm:grid-cols-3 sm:divide-x sm:divide-line">
           {pillars.map((pillar, i) => (
             <RevealItem key={pillar.title} className="flex flex-col gap-3 sm:px-8 sm:first:pl-0 sm:last:pr-0">
-              <span className="font-display text-2xl text-brass-ink">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-display text-2xl text-petrol-ink">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="font-display text-lg text-ink">{pillar.title}</h3>
               <p className="text-sm leading-relaxed text-ink-soft">{pillar.body}</p>
             </RevealItem>

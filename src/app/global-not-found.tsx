@@ -56,7 +56,7 @@ export default async function GlobalNotFound() {
     <html lang={locale} className={`${fraunces.variable} ${workSans.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col items-center justify-center gap-6 bg-parchment px-6 py-24 text-center font-sans text-ink">
         <TrioMark className="h-6 w-9 text-brass" />
-        <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-brass-ink">
+        <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-ink">
           {t.eyebrow}
         </span>
         <h1 className="font-display text-display-lg text-ink">{t.heading}</h1>
@@ -65,7 +65,7 @@ export default async function GlobalNotFound() {
         <div className="mt-2 flex flex-wrap items-center justify-center gap-4">
           <a
             href={homeHref}
-            className="inline-flex h-12 items-center justify-center rounded-[4px] bg-rust px-6 text-[0.9375rem] font-medium text-parchment hover:bg-rust-dark"
+            className="inline-flex h-12 items-center justify-center rounded-[4px] bg-petrol px-6 text-[0.9375rem] font-medium text-parchment hover:bg-petrol-deep"
           >
             {t.home}
           </a>

@@ -67,13 +67,13 @@
       "eyebrow": "Café espace ludique · Gatineau",
       "headline": "Un café qui a le goût du jeu.",
       "subtext": "Espresso soigné, cuisine maison et jeux de société, dans un décor vintage chiné avec soin, au cœur de Gatineau.",
-      "imageLabel": "Photo à venir — salle du café"
+      "imageLabel": "La façade du Café Aux Trois Licornes"
     },
     "intro": {
       "eyebrow": "Depuis juin 2025",
       "heading": "Né d'une histoire de famille",
       "body": "Café Aux Trois Licornes tient son nom des trois enfants du fondateur — une idée simple : créer un lieu où l'on prend le temps. Espresso soigné, plats maison et jeux de société se côtoient dans une salle meublée pièce par pièce de trouvailles vintage, dénichées avec soin plutôt qu'achetées en série.",
-      "imageLabel": "Photo à venir — le fondateur ou l'équipe"
+      "imageLabel": "L'équipe derrière le comptoir"
     },
     "featuredMenu": {
       "eyebrow": "À la carte",
@@ -84,7 +84,7 @@
     "experience": {
       "eyebrow": "L'expérience",
       "heading": "Plus qu'un café",
-      "imageLabel": "Photo à venir — ambiance de la salle",
+      "imageLabel": "Le coin jeux de société, meublé de trouvailles vintage",
       "pillars": [
         {
           "title": "Un décor à explorer",
@@ -133,6 +133,7 @@
     "noResults": "Aucun résultat pour « {query} ». Essayez un autre terme.",
     "resultsCount": "{count, plural, =0 {Aucun résultat} =1 {1 résultat} other {# résultats}}",
     "priceNote": "Prix sujets à changement. Informez-nous de toute allergie ou restriction alimentaire.",
+    "coverImageAlt": "Le comptoir et les menus à l'ardoise du café",
     "metaTitle": "Menu",
     "metaDescription": "La carte complète du Café Aux Trois Licornes à Gatineau : cafés, sandwichs, viennoiseries et desserts maison, avec les prix."
   },
@@ -145,7 +146,7 @@
     "storyHeading": "Trois enfants, un café",
     "storyBody1": "Ouvert en juin 2025 par Matthieu Maurice, Café Aux Trois Licornes tient son nom de ses trois enfants — une façon poétique de leur dédier son tout premier vrai pied-à-terre. Chaque meuble, chaque objet a été choisi avec soin : rien n'est acheté en série, tout est chiné, dépareillé, vivant.",
     "storyBody2": "Au fil des mois, la salle continue d'évoluer : un piano, un petit train miniature qui ravit petits et grands, et un mur d'art qui prend forme au 2e étage, une pièce à la fois.",
-    "storyImageLabel": "Photo à venir — coin lecture ou détail vintage",
+    "storyImageLabel": "Le coin piano, meublé de trouvailles chinées avec soin",
     "founderLabel": "Fondateur",
     "founderName": "Matthieu Maurice",
     "founderBody": "Matthieu accueille encore aujourd'hui les habitués en personne, du service au comptoir jusqu'à un coup de main pour monter une poussette à l'étage.",

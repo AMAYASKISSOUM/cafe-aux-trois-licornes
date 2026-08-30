@@ -11,7 +11,7 @@ export default async function NotFound() {
   return (
     <Container className="flex flex-1 flex-col items-center justify-center gap-6 py-24 text-center">
       <TrioMark className="h-6 w-9 text-brass" />
-      <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-brass-ink">
+      <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-ink">
         {t("eyebrow")}
       </span>
       <h1 className="font-display text-display-lg text-ink">{t("heading")}</h1>

@@ -21,7 +21,7 @@ export async function ReservationCta() {
       </div>
       <Container className="relative flex flex-col items-center gap-6 text-center">
         <Reveal className="flex flex-col items-center gap-6">
-          <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-brass-soft">
+          <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-soft">
             {t("eyebrow")}
           </span>
           <h2 className="font-display text-display-lg text-espresso-ink">{t("heading")}</h2>

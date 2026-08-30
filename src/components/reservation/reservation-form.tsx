@@ -219,7 +219,7 @@ export function ReservationForm({
                   className={cn(
                     "h-10 rounded-[var(--radius-sm)] border px-4 text-sm transition-colors",
                     time === slot
-                      ? "border-rust bg-rust text-parchment"
+                      ? "border-petrol bg-petrol text-parchment"
                       : "border-line text-ink-soft hover:border-ink hover:text-ink"
                   )}
                 >

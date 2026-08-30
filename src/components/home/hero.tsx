@@ -1,12 +1,38 @@
+import Image from "next/image";
 import { getTranslations, getLocale } from "next-intl/server";
 import { MapPin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/container";
 import { buttonVariants } from "@/components/ui/button";
-import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { BUSINESS } from "@/lib/business";
 import { getOpenStatus, formatHour } from "@/lib/hours";
 import { cn } from "@/lib/cn";
+
+/**
+ * Word-level reveal, not line-level: line breaks shift responsively, but a
+ * per-word clip/translate mask holds up at every width without recomputing
+ * anything. Plain CSS animation (see .animate-hero-line in globals.css) —
+ * the hero headline is the LCP element, so it must never wait on JS/motion
+ * hydration to become visible (see docs/QUALITY_AUDIT.md).
+ */
+function RevealWords({ text, startMs = 120, stepMs = 55 }: { text: string; startMs?: number; stepMs?: number }) {
+  const words = text.split(" ");
+  return (
+    <>
+      {words.map((word, i) => (
+        <span key={i} className="inline-block overflow-hidden pb-[0.15em] align-bottom -mb-[0.15em]">
+          <span
+            className="inline-block animate-hero-line"
+            style={{ animationDelay: `${startMs + i * stepMs}ms` }}
+          >
+            {word}
+            {i < words.length - 1 ? " " : ""}
+          </span>
+        </span>
+      ))}
+    </>
+  );
+}
 
 export async function Hero() {
   const [t, tCommon, locale] = await Promise.all([
@@ -19,7 +45,15 @@ export async function Hero() {
   return (
     <section className="relative flex min-h-[92svh] items-end overflow-hidden bg-espresso">
       <div className="absolute inset-0">
-        <ImagePlaceholder label={t("imageLabel")} labelPosition="top" className="h-full w-full" />
+        <Image
+          src="/images/hero/hero-facade.jpg"
+          alt={t("imageLabel")}
+          fill
+          priority
+          sizes="100vw"
+          className="animate-hero-image object-cover"
+          style={{ objectPosition: "center 38%" }}
+        />
       </div>
       <div
         aria-hidden
@@ -31,14 +65,24 @@ export async function Hero() {
       />
       <Container className="relative z-10 flex flex-col gap-8 pb-16 pt-40 sm:pb-20">
         <div className="flex max-w-2xl flex-col gap-5">
-          <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-brass-soft">
+          <span className="animate-hero-fade-up text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-soft">
             {t("eyebrow")}
           </span>
-          <h1 className="font-display text-display-xl text-espresso-ink">{t("headline")}</h1>
-          <p className="max-w-lg text-lg leading-relaxed text-espresso-ink-soft">{t("subtext")}</p>
+          <h1 className="font-display text-display-xl text-espresso-ink">
+            <RevealWords text={t("headline")} />
+          </h1>
+          <p
+            className="max-w-lg animate-hero-fade-up text-lg leading-relaxed text-espresso-ink-soft"
+            style={{ animationDelay: "420ms" }}
+          >
+            {t("subtext")}
+          </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-4">
+        <div
+          className="flex animate-hero-fade-up flex-wrap items-center gap-4"
+          style={{ animationDelay: "560ms" }}
+        >
           <Link href="/reservation" className={buttonVariants({})}>
             {tCommon("reserveTable")}
           </Link>
@@ -47,7 +91,10 @@ export async function Hero() {
           </Link>
         </div>
 
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-espresso-ink-soft">
+        <div
+          className="flex animate-hero-fade-up flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-sm text-espresso-ink-soft"
+          style={{ animationDelay: "680ms" }}
+        >
           <a
             href={BUSINESS.googleMapsDirectionsUrl}
             target="_blank"

@@ -31,6 +31,17 @@
   --color-rust-dark: #82301e;
   --color-forest: #3a4a3c;
 
+  /* Color: signature accent — sampled from the café's own turquoise counter
+     and games cabinet (real interior, see docs/PHOTO_SHOT_LIST.md). Primary
+     interactive accent (buttons, active nav, selected states, section
+     labels, icons). Brass/rust stay in reserve for stars, badges and the
+     logo's own gold. */
+  --color-petrol: #2a5f5a;
+  --color-petrol-soft: #8fc4bc;
+  --color-petrol-ink: #1f4844;
+  --color-petrol-deep: #163938;
+  --color-petrol-tint: #eef4f3;
+
   /* Color: hairlines */
   --color-line: #241a141f;
   --color-line-strong: #241a143d;
@@ -117,12 +128,12 @@
   }
 
   ::selection {
-    background-color: var(--color-rust);
+    background-color: var(--color-petrol);
     color: var(--color-parchment);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-rust);
+    outline: 2px solid var(--color-petrol);
     outline-offset: 3px;
     border-radius: var(--radius-xs);
   }
@@ -143,4 +154,69 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Hero entrance — plain CSS, deliberately NOT the `motion` library.       */
+/* The hero headline is the LCP element; a past audit found that          */
+/* `motion`'s SSR-baked `initial` state made it invisible until JS         */
+/* hydrated (see docs/QUALITY_AUDIT.md). CSS animations run from the      */
+/* browser's paint engine independent of hydration, so content is never   */
+/* gated behind JS here. prefers-reduced-motion is handled by the         */
+/* blanket rule in @layer base above.                                     */
+/* ---------------------------------------------------------------------- */
+@keyframes hero-image-reveal {
+  from {
+    transform: scale(1.045);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-line-reveal {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nav-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-image {
+  animation: hero-image-reveal 1.4s var(--ease-editorial) both;
+}
+
+.animate-hero-line {
+  animation: hero-line-reveal 0.7s var(--ease-editorial) both;
+}
+
+.animate-hero-fade-up {
+  animation: hero-fade-up 0.6s var(--ease-editorial) both;
+}
+
+.animate-nav-reveal {
+  animation: nav-fade-down 0.5s var(--ease-editorial) both;
 }

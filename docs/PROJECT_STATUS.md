@@ -1,7 +1,75 @@
 # Project Status
 
-Last updated: 2026-08-30. Checkboxes are only checked when the thing actually works, not
-when the code merely exists — see the notes under each for what "works" means here.
+Last updated: 2026-08-30 (photo integration + branding pass, later same day). Checkboxes
+are only checked when the thing actually works, not when the code merely exists — see the
+notes under each for what "works" means here.
+
+## Update: real photography, logo, palette, and motion pass (2026-08-30, later same day)
+
+The owner supplied 27 real photos from the café (`C:\Users\mayas\Downloads\photo`) plus
+the official logo. Every image was inspected manually before use. Summary — full detail in
+`docs/PHOTO_SHOT_LIST.md`:
+
+- **Logo**: the official circular unicorn crest replaces the text wordmark in the header
+  and footer. Background-removed (transparent PNG) via a one-time sharp script; a second
+  cream-ink variant was generated for the dark footer (the source had black ink, invisible
+  on the espresso background otherwise). `Café Aux Trois Licornes` is preserved as the
+  link's `aria-label` for accessibility/SEO; the wordmark text itself is gone from the DOM.
+- **Hero**: `photo1.jpeg` (exterior facade) is the homepage hero, per explicit instruction
+  — not the wide interior shot the original placeholder shot list assumed. Verified in
+  browser at mobile and desktop widths; the dark gradient overlay (unchanged from before)
+  happens to read very well against the building's own black cladding.
+- **14 of the 27 photos placed** across hero, homepage intro, experience band, 4 of 6
+  featured-menu squares, about page, and the gallery (8 slots). One photo (the board-game
+  cabinet) is deliberately reused once — homepage experience band and gallery, different
+  crops, different pages — since it's the only authentic shot of the game-table offering.
+  4 gallery slots were **relabeled** from the original placeholder shot list to honestly
+  match the photo actually available, rather than force a mismatched caption (e.g. no
+  photo shows a game mid-play, so that slot became "board game corner"). 10 photos
+  (mostly food/staff shots — grilled cheese, cookies, salad, soup, two staff-holding-
+  sandwich shots, the summer exterior sign) were **not used**, left as spares for future
+  placement — see `docs/PHOTO_SHOT_LIST.md` for the full inventory.
+- **Not wired — still placeholder, honestly**: the About page's dedicated founder portrait
+  (no photo in the set is verifiably Matthieu the owner — using an unverified staff photo
+  there would risk misattributing an identity), and 2 of 6 featured-menu squares
+  (cappuccino, croissant jambon-fromage — no distinct product shot exists for either).
+- **Palette**: re-evaluated per the brief. New signature accent — a deep petrol/teal
+  (`--color-petrol*` in `src/app/globals.css`) — sampled from the café's own turquoise
+  counter and games cabinet, visible in multiple real photos. It now drives primary
+  buttons, active nav, section labels, icons, selected reservation states, and focus/
+  selection color. Brass/gold is kept, deliberately, for the review-star ratings, the
+  "Populaire" menu badge, and one quiet CTA watermark — real-world gold-star convention,
+  and it's the logo's own accent color. Rust was retired as an accent (fully superseded by
+  petrol); the tokens remain in the theme but are unused. Background family (parchment/
+  ivory) is unchanged — it was already validated by the real interior's cream walls.
+- **Motion**: the hero's reveal is intentionally **plain CSS** (`@keyframes` in
+  `globals.css`), not the `motion` library — the hero headline is the page's LCP element,
+  and the previous audit found `motion`'s SSR-baked `initial` state made exactly this kind
+  of element invisible until JS hydrated. CSS animations run from the browser's paint
+  engine regardless of hydration, so this is a strictly safer pattern than before, not just
+  a new effect. Elsewhere, `Reveal` (still `motion`-based, unchanged safety mechanism) now
+  supports a `variant` prop (`fade` / `scale` / `clip` / `slide-left` / `slide-right`) so
+  photos across different sections don't all animate identically; the About page went from
+  zero motion to a calm, staggered reveal. Button hover states got a subtle lift + refined
+  underline transitions. Deliberately **not added**: JS scroll-linked parallax — explicitly
+  optional in the brief, real perf/complexity cost, and the exact class of risk the last
+  audit spent real effort fixing. A static, well-composed photo already reads as premium.
+- **A real, verified menu was photographed** (the in-café price board) during this pass —
+  it differs meaningfully from `src/lib/menu-data.ts` (which was sourced from Uber Eats/
+  DoorDash, not the café's own materials): a whole **"Croffle"** category doesn't exist in
+  the current data; several prices differ; "Sandwich Philly Steak" isn't tracked; and it
+  **resolves** the two items `docs/BUSINESS_RESEARCH.md` §3 flagged as unconfirmed —
+  cinnamon brioche and homemade muffins are both real, priced items. **Deliberately not
+  applied to the database or `menu-data.ts` in this pass** — that's a live-pricing change
+  to production commerce data, out of scope for a photo/branding pass, and the existing
+  menu admin (`/admin/menu`) is the right tool for the owner to reconcile it. Flagged here
+  rather than silently actioned.
+- **Lighthouse**: re-measured locally against a production build (`next start`, not the
+  live Vercel deploy — see `docs/QUALITY_AUDIT.md` for why the numbers aren't
+  apples-to-apples with the original audit, and what's actually driving the difference).
+- **Build health**: `lint`, `typecheck`, `npm test` (32/32), and `next build` all pass
+  after every change in this pass. Nothing in the reservation flow, admin, auth, i18n
+  routing, or database access was touched.
 
 ## Milestone 1 — Public website
 
@@ -83,7 +151,11 @@ when the code merely exists — see the notes under each for what "works" means 
       project settings, redeploy.
 - [ ] Confirm the Thursday closing-hour conflict (Google says midnight, the café's own site says 5 PM) — currently using the website's version. See `docs/BUSINESS_RESEARCH.md` §3.
 - [ ] Confirm the full current in-café menu (two items — cinnamon brioche, homemade muffins — appear on Google but not on either delivery platform, so they were left out rather than guessed).
-- [ ] Provide real photography — see `docs/PHOTO_SHOT_LIST.md` for the full shot list; the site is fully navigable with placeholders in the meantime.
+- [x] ~~Provide real photography~~ — done; 14 of 27 supplied photos are wired in (hero, logo,
+      intro, experience band, 4/6 featured-menu squares, about page, 8 gallery slots). Still
+      needed from the owner: a portrait of Matthieu (founder photo, currently placeholder)
+      and dedicated product shots for cappuccino and the ham-cheese croissant (2 remaining
+      featured-menu placeholders). See `docs/PHOTO_SHOT_LIST.md`.
 - [ ] Everything else flagged in `docs/BUSINESS_RESEARCH.md` §4 (Wi-Fi, allergens, exact parking arrangement, wheelchair accessibility beyond the parking lot, legal business name).
 
 ## Known issues

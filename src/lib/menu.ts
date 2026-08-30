@@ -1,6 +1,7 @@
 import { getDb, isDatabaseConfigured } from "@/db";
 import { menuCategories, menuItems } from "@/db/schema";
 import { MENU_CATEGORIES, MENU_ITEMS } from "@/lib/menu-data";
+import { MENU_ITEM_IMAGES } from "@/lib/menu-images";
 
 export interface MenuItemView {
   id?: string;
@@ -12,6 +13,7 @@ export interface MenuItemView {
   featured?: boolean;
   available?: boolean;
   order: number;
+  imageUrl?: string;
 }
 
 export interface MenuCategoryWithItems {
@@ -50,6 +52,7 @@ async function getMenuFromDb(): Promise<MenuCategoryWithItems[] | null> {
           featured: item.isFeatured,
           available: item.isAvailable,
           order: item.displayOrder,
+          imageUrl: item.imageUrl ?? MENU_ITEM_IMAGES[item.slug],
         })),
     }));
   } catch (err) {
@@ -67,7 +70,7 @@ function getMenuFromStatic(): MenuCategoryWithItems[] {
       order: category.order,
       items: MENU_ITEMS.filter((item) => item.category === category.slug)
         .sort((a, b) => a.order - b.order)
-        .map((item) => ({ ...item, available: true })),
+        .map((item) => ({ ...item, available: true, imageUrl: MENU_ITEM_IMAGES[item.slug] })),
     }));
 }
 
