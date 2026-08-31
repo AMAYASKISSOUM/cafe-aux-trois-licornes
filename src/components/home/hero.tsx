@@ -60,20 +60,35 @@ export async function Hero() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to top, color-mix(in srgb, var(--color-espresso) 94%, transparent) 0%, color-mix(in srgb, var(--color-espresso) 60%, transparent) 40%, color-mix(in srgb, var(--color-espresso) 10%, transparent) 72%, transparent 100%)",
+            "linear-gradient(to top, color-mix(in srgb, var(--color-espresso) 95%, transparent) 0%, color-mix(in srgb, var(--color-espresso) 78%, transparent) 45%, color-mix(in srgb, var(--color-espresso) 45%, transparent) 78%, color-mix(in srgb, var(--color-espresso) 15%, transparent) 100%)",
         }}
       />
+      {/*
+        The gradient above thins out near the top of the section — fine over
+        the sky, but the text block's actual position shifts with viewport
+        height (content is bottom-aligned, but a short mobile viewport means
+        the eyebrow lands higher up, over the busiest/brightest part of the
+        photo — window glass, decor). A gradient alone can't guarantee
+        contrast against an arbitrary photo, so the text itself carries a
+        shadow as a legibility floor, independent of what's behind it.
+      */}
       <Container className="relative z-10 flex flex-col gap-8 pb-16 pt-40 sm:pb-20">
         <div className="flex max-w-2xl flex-col gap-5">
-          <span className="animate-hero-fade-up text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-soft">
+          <span
+            className="animate-hero-fade-up text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-soft"
+            style={{ textShadow: "0 1px 4px rgba(0,0,0,0.55), 0 2px 14px rgba(0,0,0,0.4)" }}
+          >
             {t("eyebrow")}
           </span>
-          <h1 className="font-display text-display-xl text-espresso-ink">
+          <h1
+            className="font-display text-display-xl text-espresso-ink"
+            style={{ textShadow: "0 2px 16px rgba(0,0,0,0.4)" }}
+          >
             <RevealWords text={t("headline")} />
           </h1>
           <p
             className="max-w-lg animate-hero-fade-up text-lg leading-relaxed text-espresso-ink-soft"
-            style={{ animationDelay: "420ms" }}
+            style={{ animationDelay: "420ms", textShadow: "0 1px 10px rgba(0,0,0,0.45)" }}
           >
             {t("subtext")}
           </p>
