@@ -9,6 +9,7 @@ import { BUSINESS } from "@/lib/business";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { MotionProvider } from "@/components/motion-provider";
+import { RouteRepaintFix } from "@/components/route-repaint-fix";
 import { buildLocalBusinessJsonLd } from "@/lib/structured-data";
 import "../globals.css";
 
@@ -67,6 +68,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
         />
         <NextIntlClientProvider>
           <MotionProvider>
+            <RouteRepaintFix />
             <a
               href="#main"
               className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-[100] focus-visible:rounded-[var(--radius-sm)] focus-visible:bg-ink focus-visible:px-4 focus-visible:py-2 focus-visible:text-parchment"
