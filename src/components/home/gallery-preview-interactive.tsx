@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { Maximize2 } from "lucide-react";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { Lightbox, type LightboxImage } from "@/components/ui/lightbox";
 import { RevealGroup, RevealItem } from "@/components/ui/reveal";
+import { useSnapIndex } from "@/components/ui/use-snap-index";
 import { cn } from "@/lib/cn";
 
 const MOSAIC_SPANS = [
@@ -38,11 +40,16 @@ const THUMB_BASE =
  */
 export function GalleryPreviewInteractive({ images, labels }: { images: GalleryPreviewImage[]; labels: Labels }) {
   const [index, setIndex] = useState<number | null>(null);
+  const { ref: stripRef, onScroll: handleStripScroll, index: stripIndex } = useSnapIndex();
 
   return (
     <>
       {/* Mobile: horizontal snap strip, next card peeking in at the edge */}
-      <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:hidden">
+      <div
+        ref={stripRef}
+        onScroll={handleStripScroll}
+        className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:hidden"
+      >
         {images.map((img, i) => (
           <div key={img.slug} className="relative aspect-[4/5] w-[72vw] flex-none snap-start">
             <button
@@ -54,6 +61,17 @@ export function GalleryPreviewInteractive({ images, labels }: { images: GalleryP
               <GalleryThumb img={img} sizes="72vw" alwaysShowBadge />
             </button>
           </div>
+        ))}
+      </div>
+      <div className="mt-4 flex justify-center gap-1.5 sm:hidden" aria-hidden>
+        {images.map((_, i) => (
+          <span
+            key={i}
+            className={cn(
+              "h-1.5 rounded-full transition-all duration-300 ease-[var(--ease-editorial)]",
+              i === stripIndex ? "w-5 bg-petrol" : "w-1.5 bg-ink-faint/40"
+            )}
+          />
         ))}
       </div>
 
@@ -96,13 +114,15 @@ function GalleryThumb({
   return (
     <>
       {img.src ? (
-        <Image
-          src={img.src}
-          alt={img.alt}
-          fill
-          sizes={sizes}
-          className="object-cover transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-110"
-        />
+        <motion.div layoutId={`gallery-photo-${img.slug}`} className="absolute inset-0">
+          <Image
+            src={img.src}
+            alt={img.alt}
+            fill
+            sizes={sizes}
+            className="object-cover transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-110"
+          />
+        </motion.div>
       ) : (
         <ImagePlaceholder label={img.alt} className="h-full w-full" />
       )}

@@ -112,7 +112,7 @@ export function SiteHeader() {
 
         <nav
           aria-label="Principale"
-          className="hidden items-center gap-8 lg:flex"
+          className="hidden items-center gap-0.5 lg:flex"
           onMouseLeave={() => setHovered(null)}
         >
           {NAV_ITEMS.map((item) => {
@@ -125,20 +125,24 @@ export function SiteHeader() {
                 aria-current={active ? "page" : undefined}
                 onMouseEnter={() => setHovered(item.href)}
                 onFocus={() => setHovered(item.href)}
-                className={cn(
-                  "relative py-1 text-[0.9375rem] font-medium text-ink-soft transition-colors hover:text-ink",
-                  active && "text-ink"
-                )}
+                className="relative rounded-full px-4 py-2 text-[0.9375rem] font-medium"
               >
-                {t(item.labelKey)}
                 {indicated && (
                   <motion.span
-                    layoutId="nav-indicator"
-                    transition={{ duration: 0.3, ease: EASE }}
-                    className="absolute -bottom-0.5 left-0 h-px w-full bg-petrol"
+                    layoutId="nav-pill"
+                    transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                    className="absolute inset-0 rounded-full bg-petrol-tint"
                     aria-hidden
                   />
                 )}
+                <span
+                  className={cn(
+                    "relative transition-colors duration-[var(--duration-level1)]",
+                    indicated ? "text-petrol-deep" : "text-ink-soft"
+                  )}
+                >
+                  {t(item.labelKey)}
+                </span>
               </Link>
             );
           })}

@@ -9,6 +9,8 @@ export interface LightboxImage {
   src?: string;
   alt: string;
   ratio?: string;
+  /** Shared with the grid thumbnail's `layoutId` so opening morphs the clicked photo into place instead of just fading a new one in. */
+  slug: string;
 }
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -128,7 +130,12 @@ export function Lightbox({
         </>
       )}
 
-      <div className="flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+      <motion.div
+        layoutId={`gallery-photo-${current.slug}`}
+        transition={{ duration: 0.4, ease: EASE }}
+        className="flex items-center justify-center"
+        onClick={(e) => e.stopPropagation()}
+      >
         {current.src ? (
           <Image
             key={current.src}
@@ -144,7 +151,7 @@ export function Lightbox({
             {current.alt}
           </div>
         )}
-      </div>
+      </motion.div>
 
       <p className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 text-center text-sm text-espresso-ink-soft sm:bottom-6">
         {current.alt}

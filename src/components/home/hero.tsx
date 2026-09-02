@@ -4,38 +4,25 @@ import { MapPin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/container";
 import { buttonVariants, ButtonArrow } from "@/components/ui/button";
-import { AnimatedTrioMark } from "@/components/ui/trio-mark-animated";
 import { AnimatedDrawPath } from "@/components/ui/animated-draw-path";
+import { RevealWords } from "@/components/ui/reveal-words";
+import { HeroParallax } from "@/components/ui/hero-parallax";
 import { Magnetic } from "@/components/ui/magnetic";
 import { BUSINESS } from "@/lib/business";
 import { getOpenStatus, formatHour } from "@/lib/hours";
 import { cn } from "@/lib/cn";
 
 /**
- * Word-level reveal, not line-level: line breaks shift responsively, but a
- * per-word clip/translate mask holds up at every width without recomputing
- * anything. Plain CSS animation (see .animate-hero-line in globals.css) —
- * the hero headline is the LCP element, so it must never wait on JS/motion
- * hydration to become visible (see docs/QUALITY_AUDIT.md).
+ * One continuous-feeling flourish carrying the same three tapered forms as
+ * `TrioMark`, scaled up into a signature moment instead of a small static
+ * glyph. Anime.js draws all four paths in one staggered pass.
  */
-function RevealWords({ text, startMs = 120, stepMs = 55 }: { text: string; startMs?: number; stepMs?: number }) {
-  const words = text.split(" ");
-  return (
-    <>
-      {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden pb-[0.15em] align-bottom -mb-[0.15em]">
-          <span
-            className="inline-block animate-hero-line"
-            style={{ animationDelay: `${startMs + i * stepMs}ms` }}
-          >
-            {word}
-            {i < words.length - 1 ? " " : ""}
-          </span>
-        </span>
-      ))}
-    </>
-  );
-}
+const HERO_FLOURISH_PATHS = [
+  "M2 18C24 7 38 25 58 15C74 7 84 20 100 13",
+  "M114 15C118 15 113 5 117 1",
+  "M130 15C134 15 128 4 133 0",
+  "M146 15C150 15 144 6 149 2",
+] as const;
 
 export async function Hero() {
   const [t, tCommon, locale] = await Promise.all([
@@ -47,7 +34,7 @@ export async function Hero() {
 
   return (
     <section className="relative flex min-h-[92svh] items-end overflow-hidden bg-espresso">
-      <div className="absolute inset-0">
+      <HeroParallax>
         <Image
           src="/images/hero/hero-facade.jpg"
           alt={t("imageLabel")}
@@ -57,7 +44,7 @@ export async function Hero() {
           className="animate-hero-image object-cover"
           style={{ objectPosition: "center 38%" }}
         />
-      </div>
+      </HeroParallax>
       <div
         aria-hidden
         className="absolute inset-0"
@@ -66,9 +53,6 @@ export async function Hero() {
             "linear-gradient(to top, color-mix(in srgb, var(--color-espresso) 95%, transparent) 0%, color-mix(in srgb, var(--color-espresso) 78%, transparent) 45%, color-mix(in srgb, var(--color-espresso) 45%, transparent) 78%, color-mix(in srgb, var(--color-espresso) 15%, transparent) 100%)",
         }}
       />
-      <div aria-hidden className="pointer-events-none absolute bottom-16 right-10 hidden text-brass/[0.32] lg:block">
-        <AnimatedTrioMark className="h-10 w-14" trigger="mount" />
-      </div>
       {/*
         The gradient above thins out near the top of the section — fine over
         the sky, but the text block's actual position shifts with viewport
@@ -88,14 +72,15 @@ export async function Hero() {
               {t("eyebrow")}
             </span>
             <AnimatedDrawPath
-              d="M1 5.5C11 2 21 8 33 4.5C46 1 58 7.5 71 4"
-              viewBox="0 0 72 9"
+              d={HERO_FLOURISH_PATHS}
+              viewBox="0 0 152 28"
               trigger="mount"
               mountDelay={900}
-              duration={650}
+              duration={900}
+              staggerMs={160}
               strokeWidth={1.5}
               nonScalingStroke
-              className="h-2 w-[4.5rem] text-brass-soft/70"
+              className="h-4 w-32 text-brass-soft/80 sm:h-5 sm:w-40"
             />
           </span>
           <h1

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 import { Maximize2 } from "lucide-react";
 import { ImagePlaceholder } from "@/components/ui/image-placeholder";
 import { Lightbox, type LightboxImage } from "@/components/ui/lightbox";
@@ -33,13 +34,16 @@ export function GalleryMasonry({ images, labels }: { images: MasonryImage[]; lab
               style={{ aspectRatio: img.ratio ?? "4/5" }}
             >
               {img.src ? (
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-[1.05]"
-                />
+                <motion.div layoutId={`gallery-photo-${img.slug}`} className="absolute inset-0">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    priority={i === 0}
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-[1.05]"
+                  />
+                </motion.div>
               ) : (
                 <ImagePlaceholder label={img.alt} className="absolute inset-0" />
               )}

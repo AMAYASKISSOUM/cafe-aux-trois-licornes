@@ -26,7 +26,7 @@ export async function GalleryPreview() {
     <section className="py-20 sm:py-28">
       <Container>
         <Reveal className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
-          <SectionHeading eyebrow={t("eyebrow")} heading={t("heading")} />
+          <SectionHeading eyebrow={t("eyebrow")} heading={t("heading")} reveal="line" />
           <Link href="/galerie" className={buttonVariants({ variant: "secondary", size: "sm" })}>
             {tCommon("seeAll")}
             <ButtonArrow />

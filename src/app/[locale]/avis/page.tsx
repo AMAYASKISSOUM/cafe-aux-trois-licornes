@@ -6,6 +6,7 @@ import { getReviewSummary } from "@/lib/google-reviews";
 import { BUSINESS } from "@/lib/business";
 import { Container } from "@/components/ui/container";
 import { PageHeader } from "@/components/ui/page-header";
+import { SlideText } from "@/components/ui/slide-text";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/avis">): Promise<Metadata> {
   const { locale } = await params;
@@ -60,7 +61,7 @@ export default async function ReviewsPage({ params }: PageProps<"/[locale]/avis"
           rel="noopener noreferrer"
           className="mt-8 inline-block text-sm font-medium text-brass-ink underline decoration-brass/40 underline-offset-4 hover:decoration-brass-ink"
         >
-          {t("viewOnGoogle")}
+          <SlideText text={t("viewOnGoogle")} />
         </a>
       </Container>
     </>

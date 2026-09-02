@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
+import { RevealWords } from "@/components/ui/reveal-words";
 import { cn } from "@/lib/cn";
 
 export function PageHeader({
@@ -38,12 +39,25 @@ export function PageHeader({
           }}
         />
         <Container className="relative z-10 flex flex-col gap-4">
-          <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-soft">
+          <span className="animate-hero-fade-up text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-soft">
             {eyebrow}
           </span>
-          <h1 className="font-display text-display-lg text-espresso-ink">{heading}</h1>
-          {intro && <p className="max-w-lg text-base leading-relaxed text-espresso-ink-soft">{intro}</p>}
-          {children}
+          <h1 className="font-display text-display-lg text-espresso-ink">
+            <RevealWords text={heading} />
+          </h1>
+          {intro && (
+            <p
+              className="max-w-lg animate-hero-fade-up text-base leading-relaxed text-espresso-ink-soft"
+              style={{ animationDelay: "160ms" }}
+            >
+              {intro}
+            </p>
+          )}
+          {children && (
+            <div className="animate-hero-fade-up" style={{ animationDelay: "260ms" }}>
+              {children}
+            </div>
+          )}
         </Container>
       </div>
     );
@@ -52,12 +66,25 @@ export function PageHeader({
   return (
     <div className={cn("border-b border-line bg-parchment-deep py-16 sm:py-20", className)}>
       <Container className="flex flex-col gap-4">
-        <span className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-ink">
+        <span className="animate-hero-fade-up text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-ink">
           {eyebrow}
         </span>
-        <h1 className="font-display text-display-lg text-ink">{heading}</h1>
-        {intro && <p className="max-w-lg text-base leading-relaxed text-ink-soft">{intro}</p>}
-        {children}
+        <h1 className="font-display text-display-lg text-ink">
+          <RevealWords text={heading} />
+        </h1>
+        {intro && (
+          <p
+            className="max-w-lg animate-hero-fade-up text-base leading-relaxed text-ink-soft"
+            style={{ animationDelay: "160ms" }}
+          >
+            {intro}
+          </p>
+        )}
+        {children && (
+          <div className="animate-hero-fade-up" style={{ animationDelay: "260ms" }}>
+            {children}
+          </div>
+        )}
       </Container>
     </div>
   );

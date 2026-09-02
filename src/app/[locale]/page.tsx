@@ -6,6 +6,7 @@ import { Intro } from "@/components/home/intro";
 import { FeaturedMenu } from "@/components/home/featured-menu";
 import { Experience } from "@/components/home/experience";
 import { GalleryPreview } from "@/components/home/gallery-preview";
+import { EditorialBand } from "@/components/home/editorial-band";
 import { ReviewsSection } from "@/components/home/reviews-section";
 import { ReservationCta } from "@/components/home/reservation-cta";
 import { LocationSection } from "@/components/home/location-section";
@@ -26,6 +27,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <FeaturedMenu />
       <Experience />
       <GalleryPreview />
+      <EditorialBand />
       <ReviewsSection />
       <ReservationCta />
       <LocationSection />

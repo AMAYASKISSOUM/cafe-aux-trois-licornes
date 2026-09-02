@@ -1,10 +1,12 @@
-import { getTranslations } from "next-intl/server";
 import { Star, Quote } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Container } from "@/components/ui/container";
 import { getReviewSummary } from "@/lib/google-reviews";
 import { BUSINESS } from "@/lib/business";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
+import { ReviewsMobileStrip } from "@/components/home/reviews-mobile-strip";
+import { SlideText } from "@/components/ui/slide-text";
 
 export async function ReviewsSection() {
   const t = await getTranslations("home.reviews");
@@ -36,33 +38,32 @@ export async function ReviewsSection() {
         </Reveal>
 
         {featured && (
-          <Reveal variant="card">
-            <figure className="relative flex flex-col gap-5 overflow-hidden bg-petrol-tint px-7 py-9 sm:px-10 sm:py-11">
-              <Quote className="h-8 w-8 text-petrol-soft" aria-hidden />
-              <blockquote className="max-w-2xl font-display text-2xl leading-snug text-petrol-deep sm:text-3xl">
-                “{featured.quote}”
-              </blockquote>
-              <figcaption className="text-sm font-medium text-petrol-ink">
-                {featured.author} · {featured.approxDate}
-              </figcaption>
-            </figure>
-          </Reveal>
+          <div className="relative">
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-20 bg-parchment-deep/70"
+              style={{ transform: "rotate(-2.5deg)" }}
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-10 bg-parchment-deep"
+              style={{ transform: "rotate(1.75deg)" }}
+            />
+            <Reveal variant="card">
+              <figure className="relative flex flex-col gap-5 overflow-hidden bg-petrol-tint px-7 py-9 sm:px-10 sm:py-11">
+                <Quote className="h-8 w-8 text-petrol-soft" aria-hidden />
+                <blockquote className="max-w-2xl font-display text-2xl leading-snug text-petrol-deep sm:text-3xl">
+                  “{featured.quote}”
+                </blockquote>
+                <figcaption className="text-sm font-medium text-petrol-ink">
+                  {featured.author} · {featured.approxDate}
+                </figcaption>
+              </figure>
+            </Reveal>
+          </div>
         )}
 
-        {/* Mobile: horizontal snap strip */}
-        <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:hidden">
-          {rest.map((review, i) => (
-            <figure
-              key={i}
-              className="flex w-[78vw] flex-none snap-start flex-col gap-4 border-t border-line pt-6"
-            >
-              <blockquote className="font-display text-lg leading-snug text-ink">“{review.quote}”</blockquote>
-              <figcaption className="text-sm text-ink-faint">
-                {review.author} · {review.approxDate}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        <ReviewsMobileStrip reviews={rest} />
 
         {/* Desktop: staggered grid */}
         <RevealGroup className="hidden grid-cols-1 gap-x-10 gap-y-10 sm:grid sm:grid-cols-2 lg:grid-cols-3">
@@ -86,7 +87,7 @@ export async function ReviewsSection() {
           rel="noopener noreferrer"
           className="text-sm font-medium text-brass-ink underline decoration-brass/40 underline-offset-4 hover:decoration-brass-ink"
         >
-          {t("viewOnGoogle")}
+          <SlideText text={t("viewOnGoogle")} />
         </a>
       </Container>
     </section>

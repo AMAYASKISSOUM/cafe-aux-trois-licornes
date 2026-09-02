@@ -23,12 +23,15 @@ export async function LocationSection() {
     <section className="py-20 sm:py-28">
       <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
         <Reveal variant="slide-left" className="flex flex-col gap-8">
-          <SectionHeading eyebrow={t("eyebrow")} heading={t("heading")} />
+          <SectionHeading eyebrow={t("eyebrow")} heading={t("heading")} reveal="line" />
           <p className="max-w-sm text-base leading-relaxed text-ink-soft">{t("body")}</p>
 
           <dl className="flex flex-col gap-4 text-sm">
             <div className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-petrol-ink" aria-hidden />
+              <span className="relative mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center" aria-hidden>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-petrol/30" />
+                <MapPin className="relative h-4 w-4 text-petrol-ink" />
+              </span>
               <dd className="text-ink-soft">
                 {BUSINESS.address.street}, {BUSINESS.address.city} ({BUSINESS.address.region}){" "}
                 {BUSINESS.address.postalCode}
@@ -77,7 +80,7 @@ export async function LocationSection() {
         <Reveal
           variant="slide-right"
           delay={0.1}
-          className="min-h-[320px] overflow-hidden rounded-[var(--radius-md)] border border-line lg:min-h-full"
+          className="min-h-[320px] overflow-hidden rounded-[var(--radius-md)] border border-line transition-shadow duration-[var(--duration-level3)] ease-[var(--ease-editorial)] hover:shadow-soft lg:min-h-full"
         >
           <iframe
             title={t("mapTitle")}
