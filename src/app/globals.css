@@ -167,10 +167,23 @@
 /* ---------------------------------------------------------------------- */
 @keyframes hero-image-reveal {
   from {
-    transform: scale(1.045);
+    transform: scale(1.06);
   }
   to {
     transform: scale(1);
+  }
+}
+
+/* Very slow ambient drift picked up once the entrance reveal settles — a
+   held breath, not a Ken Burns pan. Transform-only so it costs nothing on
+   the main thread; forced to 0.01ms by the reduced-motion rule above like
+   every other animation here. */
+@keyframes hero-image-drift {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.045);
   }
 }
 
@@ -206,7 +219,9 @@
 }
 
 .animate-hero-image {
-  animation: hero-image-reveal 1.4s var(--ease-editorial) both;
+  animation:
+    hero-image-reveal 1.6s var(--ease-editorial) both,
+    hero-image-drift 22s ease-in-out 1.6s infinite alternate;
 }
 
 .animate-hero-line {

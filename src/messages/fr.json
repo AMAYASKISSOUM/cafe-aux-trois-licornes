@@ -42,7 +42,11 @@
     "loading": "Chargement…",
     "skipToContent": "Aller au contenu principal",
     "getDirections": "Itinéraire",
-    "backHome": "Retour à l'accueil"
+    "backHome": "Retour à l'accueil",
+    "close": "Fermer",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "openImage": "Agrandir la photo"
   },
   "days": {
     "0": "Dimanche",

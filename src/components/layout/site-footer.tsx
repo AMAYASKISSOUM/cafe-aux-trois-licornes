@@ -8,6 +8,7 @@ import { FacebookIcon, InstagramIcon } from "@/components/ui/social-icons";
 import { NAV_ITEMS } from "@/lib/nav";
 import { BUSINESS } from "@/lib/business";
 import { formatHour, groupWeeklyHours } from "@/lib/hours";
+import { Reveal } from "@/components/ui/reveal";
 
 export async function SiteFooter() {
   const [t, tDays, locale] = await Promise.all([
@@ -20,6 +21,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="bg-espresso text-espresso-ink">
+      <Reveal>
       <Container className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.1fr] lg:py-20">
         <div className="flex flex-col gap-5">
           <Wordmark dark size="lg" />
@@ -33,7 +35,7 @@ export async function SiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="text-espresso-ink-soft transition-colors hover:text-espresso-ink"
+                className="text-espresso-ink-soft transition-[color,transform] duration-[var(--duration-fast)] hover:-translate-y-0.5 hover:text-espresso-ink inline-block"
               >
                 <FacebookIcon className="h-5 w-5" />
               </a>
@@ -44,7 +46,7 @@ export async function SiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="text-espresso-ink-soft transition-colors hover:text-espresso-ink"
+                className="text-espresso-ink-soft transition-[color,transform] duration-[var(--duration-fast)] hover:-translate-y-0.5 hover:text-espresso-ink inline-block"
               >
                 <InstagramIcon className="h-5 w-5" />
               </a>
@@ -131,6 +133,7 @@ export async function SiteFooter() {
           </a>
         </div>
       </Container>
+      </Reveal>
 
       <div className="border-t border-line-on-dark">
         <Container className="flex flex-col-reverse items-center gap-4 py-6 text-xs text-espresso-ink-soft sm:flex-row sm:justify-between">

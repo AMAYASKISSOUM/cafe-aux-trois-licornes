@@ -3,7 +3,10 @@ import { getTranslations, getLocale } from "next-intl/server";
 import { MapPin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/container";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants, ButtonArrow } from "@/components/ui/button";
+import { AnimatedTrioMark } from "@/components/ui/trio-mark-animated";
+import { AnimatedDrawPath } from "@/components/ui/animated-draw-path";
+import { Magnetic } from "@/components/ui/magnetic";
 import { BUSINESS } from "@/lib/business";
 import { getOpenStatus, formatHour } from "@/lib/hours";
 import { cn } from "@/lib/cn";
@@ -63,6 +66,9 @@ export async function Hero() {
             "linear-gradient(to top, color-mix(in srgb, var(--color-espresso) 95%, transparent) 0%, color-mix(in srgb, var(--color-espresso) 78%, transparent) 45%, color-mix(in srgb, var(--color-espresso) 45%, transparent) 78%, color-mix(in srgb, var(--color-espresso) 15%, transparent) 100%)",
         }}
       />
+      <div aria-hidden className="pointer-events-none absolute bottom-16 right-10 hidden text-brass/[0.32] lg:block">
+        <AnimatedTrioMark className="h-10 w-14" trigger="mount" />
+      </div>
       {/*
         The gradient above thins out near the top of the section — fine over
         the sky, but the text block's actual position shifts with viewport
@@ -74,11 +80,23 @@ export async function Hero() {
       */}
       <Container className="relative z-10 flex flex-col gap-8 pb-16 pt-40 sm:pb-20">
         <div className="flex max-w-2xl flex-col gap-5">
-          <span
-            className="animate-hero-fade-up text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-soft"
-            style={{ textShadow: "0 1px 4px rgba(0,0,0,0.55), 0 2px 14px rgba(0,0,0,0.4)" }}
-          >
-            {t("eyebrow")}
+          <span className="flex animate-hero-fade-up flex-col items-start gap-1.5">
+            <span
+              className="text-eyebrow font-semibold uppercase tracking-[0.16em] text-petrol-soft"
+              style={{ textShadow: "0 1px 4px rgba(0,0,0,0.55), 0 2px 14px rgba(0,0,0,0.4)" }}
+            >
+              {t("eyebrow")}
+            </span>
+            <AnimatedDrawPath
+              d="M1 5.5C11 2 21 8 33 4.5C46 1 58 7.5 71 4"
+              viewBox="0 0 72 9"
+              trigger="mount"
+              mountDelay={900}
+              duration={650}
+              strokeWidth={1.5}
+              nonScalingStroke
+              className="h-2 w-[4.5rem] text-brass-soft/70"
+            />
           </span>
           <h1
             className="font-display text-display-xl text-espresso-ink"
@@ -98,11 +116,15 @@ export async function Hero() {
           className="flex animate-hero-fade-up flex-wrap items-center gap-4"
           style={{ animationDelay: "560ms" }}
         >
-          <Link href="/reservation" className={buttonVariants({})}>
-            {tCommon("reserveTable")}
-          </Link>
+          <Magnetic>
+            <Link href="/reservation" className={buttonVariants({})}>
+              {tCommon("reserveTable")}
+              <ButtonArrow />
+            </Link>
+          </Magnetic>
           <Link href="/menu" className={buttonVariants({ variant: "on-dark" })}>
             {tCommon("viewMenu")}
+            <ButtonArrow />
           </Link>
         </div>
 
@@ -120,10 +142,17 @@ export async function Hero() {
             {BUSINESS.address.street}, {BUSINESS.address.city}
           </a>
           <span className="flex items-center gap-2">
-            <span
-              className={cn("h-1.5 w-1.5 rounded-full", status.isOpen ? "bg-open" : "bg-espresso-ink-soft")}
-              aria-hidden
-            />
+            <span className="relative flex h-1.5 w-1.5" aria-hidden>
+              {status.isOpen && (
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-open opacity-75" />
+              )}
+              <span
+                className={cn(
+                  "relative inline-flex h-1.5 w-1.5 rounded-full",
+                  status.isOpen ? "bg-open" : "bg-espresso-ink-soft"
+                )}
+              />
+            </span>
             {status.isOpen && status.nextChangeTime
               ? `${tCommon("openNow")} · ${tCommon("closesAt", { time: formatHour(status.nextChangeTime, locale) })}`
               : status.nextChangeTime

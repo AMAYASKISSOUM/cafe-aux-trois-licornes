@@ -2,9 +2,10 @@ import { getTranslations, getLocale } from "next-intl/server";
 import { MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants, ButtonArrow } from "@/components/ui/button";
 import { BUSINESS } from "@/lib/business";
 import { formatHour, groupWeeklyHours } from "@/lib/hours";
+import { Reveal } from "@/components/ui/reveal";
 
 export async function LocationSection() {
   const [t, tCommon, tDays, locale] = await Promise.all([
@@ -21,7 +22,7 @@ export async function LocationSection() {
   return (
     <section className="py-20 sm:py-28">
       <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-        <div className="flex flex-col gap-8">
+        <Reveal variant="slide-left" className="flex flex-col gap-8">
           <SectionHeading eyebrow={t("eyebrow")} heading={t("heading")} />
           <p className="max-w-sm text-base leading-relaxed text-ink-soft">{t("body")}</p>
 
@@ -69,17 +70,22 @@ export async function LocationSection() {
             className={buttonVariants({ variant: "secondary", className: "self-start" })}
           >
             {tCommon("getDirections")}
+            <ButtonArrow />
           </a>
-        </div>
+        </Reveal>
 
-        <div className="min-h-[320px] overflow-hidden rounded-[var(--radius-md)] border border-line lg:min-h-full">
+        <Reveal
+          variant="slide-right"
+          delay={0.1}
+          className="min-h-[320px] overflow-hidden rounded-[var(--radius-md)] border border-line lg:min-h-full"
+        >
           <iframe
             title={t("mapTitle")}
             src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
             className="h-full min-h-[320px] w-full grayscale-[15%]"
             referrerPolicy="no-referrer-when-downgrade"
           />
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

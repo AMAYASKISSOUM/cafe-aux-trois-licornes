@@ -42,7 +42,11 @@
     "loading": "Loading…",
     "skipToContent": "Skip to main content",
     "getDirections": "Get directions",
-    "backHome": "Back to home"
+    "backHome": "Back to home",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "openImage": "Enlarge photo"
   },
   "days": {
     "0": "Sunday",

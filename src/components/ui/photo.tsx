@@ -36,7 +36,10 @@ export function Photo({
           fill
           priority={priority}
           sizes={sizes}
-          className={cn("object-cover", imgClassName)}
+          className={cn(
+            "object-cover transition-transform duration-700 ease-[var(--ease-editorial)] hover:scale-[1.04]",
+            imgClassName
+          )}
         />
       ) : (
         <ImagePlaceholder label={label ?? alt} className="absolute inset-0" />

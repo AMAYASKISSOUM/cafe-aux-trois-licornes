@@ -32,11 +32,13 @@ const revealVariants = {
     hidden: { opacity: 0, x: 28 },
     show: { opacity: 1, x: 0, transition: { duration: 0.7, ease: EASE } },
   },
+  card: {
+    hidden: { opacity: 0, y: 26, rotate: -1.25, scale: 0.97 },
+    show: { opacity: 1, y: 0, rotate: 0, scale: 1, transition: { duration: 0.55, ease: EASE } },
+  },
 } satisfies Record<string, Variants>;
 
 export type RevealVariant = keyof typeof revealVariants;
-
-const variants: Variants = revealVariants.fade;
 
 const noopSubscribe = () => () => {};
 
@@ -109,9 +111,17 @@ export function RevealGroup({
   );
 }
 
-export function RevealItem({ children, className }: { children: React.ReactNode; className?: string }) {
+export function RevealItem({
+  children,
+  className,
+  variant = "fade",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  variant?: RevealVariant;
+}) {
   return (
-    <motion.div className={className} variants={variants}>
+    <motion.div className={className} variants={revealVariants[variant]}>
       {children}
     </motion.div>
   );
