@@ -9,7 +9,6 @@ import { BUSINESS } from "@/lib/business";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { MotionProvider } from "@/components/motion-provider";
-import { PageTransition } from "@/components/ui/page-transition";
 import { buildLocalBusinessJsonLd } from "@/lib/structured-data";
 import "../globals.css";
 
@@ -75,7 +74,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
               {await getSkipLabel(locale)}
             </a>
             <SiteHeader />
-            <PageTransition>{children}</PageTransition>
+            <main id="main" className="flex flex-1 flex-col">
+              {children}
+            </main>
             <SiteFooter />
           </MotionProvider>
         </NextIntlClientProvider>
