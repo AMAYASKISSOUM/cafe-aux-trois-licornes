@@ -120,7 +120,7 @@ function GalleryThumb({
             alt={img.alt}
             fill
             sizes={sizes}
-            className="object-cover transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-110"
+            className="object-cover transition-transform duration-700 ease-[var(--ease-editorial)] group-hover:scale-110 group-active:scale-95 group-active:duration-150"
           />
         </motion.div>
       ) : (

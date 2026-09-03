@@ -18,7 +18,7 @@ export function CategoryNav({
         <a
           key={c.slug}
           href={`#${c.slug}`}
-          className="flex-none whitespace-nowrap rounded-[var(--radius-sm)] border border-line px-4 py-2 text-sm text-ink-soft transition-colors hover:border-petrol hover:text-petrol-ink"
+          className="flex-none whitespace-nowrap rounded-[var(--radius-sm)] border border-line px-4 py-2 text-sm text-ink-soft transition-[color,border-color,transform] duration-[var(--duration-level1)] hover:border-petrol hover:text-petrol-ink active:scale-[0.94] active:border-petrol active:text-petrol-ink"
         >
           {localized(c.name, locale)}
         </a>

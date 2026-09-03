@@ -21,7 +21,7 @@ export function LanguageSwitch({ dark, size = "sm" }: { dark?: boolean; size?: "
             disabled={l === locale}
             onClick={() => router.replace(pathname, { locale: l })}
             className={cn(
-              "rounded-full border px-4 py-1.5 uppercase tracking-[0.04em] transition-colors duration-[var(--duration-fast)] disabled:cursor-default",
+              "rounded-full border px-4 py-1.5 uppercase tracking-[0.04em] transition-[color,border-color,background-color,transform] duration-[var(--duration-fast)] active:scale-90 disabled:cursor-default disabled:active:scale-100",
               l === locale
                 ? "border-brass-soft bg-brass-soft/15 text-espresso-ink"
                 : "border-espresso-ink/20 text-espresso-ink-soft hover:border-espresso-ink/40 hover:text-espresso-ink"
@@ -53,7 +53,7 @@ export function LanguageSwitch({ dark, size = "sm" }: { dark?: boolean; size?: "
             disabled={l === locale}
             onClick={() => router.replace(pathname, { locale: l })}
             className={cn(
-              "uppercase tracking-[0.04em] disabled:cursor-default",
+              "uppercase tracking-[0.04em] transition-transform duration-[var(--duration-fast)] active:scale-90 disabled:cursor-default disabled:active:scale-100",
               l === locale
                 ? dark
                   ? "text-espresso-ink"

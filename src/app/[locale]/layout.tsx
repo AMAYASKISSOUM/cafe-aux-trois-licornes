@@ -8,6 +8,7 @@ import { SITE_URL } from "@/lib/site";
 import { BUSINESS } from "@/lib/business";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { MobileStickyReserve } from "@/components/layout/mobile-sticky-reserve";
 import { MotionProvider } from "@/components/motion-provider";
 import { RouteRepaintFix } from "@/components/route-repaint-fix";
 import { buildLocalBusinessJsonLd } from "@/lib/structured-data";
@@ -80,6 +81,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
               {children}
             </main>
             <SiteFooter />
+            <MobileStickyReserve />
           </MotionProvider>
         </NextIntlClientProvider>
       </body>

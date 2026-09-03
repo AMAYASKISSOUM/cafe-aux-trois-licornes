@@ -80,7 +80,7 @@ export async function Hero() {
               staggerMs={160}
               strokeWidth={1.5}
               nonScalingStroke
-              className="h-4 w-32 text-brass-soft/80 sm:h-5 sm:w-40"
+              className="h-5 w-40 text-brass-soft/80 sm:h-6 sm:w-48"
             />
           </span>
           <h1
